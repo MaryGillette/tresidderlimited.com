@@ -11,8 +11,10 @@ class CreateRoles < ActiveRecord::Migration
     add_index "roles_users", "role_id"
     add_index "roles_users", "user_id"
     
-    Role.create(:name => 'superuser')
     Role.create(:name => 'administrator')
+    Role.create(:name => 'superuser')
+
+    execute "INSERT into roles_users (role_id, user_id) VALUES ('1','1')"
   end
 
   

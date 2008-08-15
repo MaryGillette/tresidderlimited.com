@@ -16,33 +16,33 @@ ActiveRecord::Schema.define(:version => 20080815004538) do
   end
 
   create_table "roles_users", :id => false, :force => true do |t|
-    t.integer "role_id"
-    t.integer "user_id"
+    t.integer "role_id", :limit => 11
+    t.integer "user_id", :limit => 11
   end
 
-  add_index "roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
   add_index "roles_users", ["role_id"], :name => "index_roles_users_on_role_id"
+  add_index "roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
 
   create_table "sessions", :force => true do |t|
-    t.string   "session_id", :null => false
+    t.string   "session_id", :default => "", :null => false
     t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "slugs", :force => true do |t|
     t.string   "name"
     t.string   "sluggable_type"
-    t.integer  "sluggable_id"
+    t.integer  "sluggable_id",   :limit => 11
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "slugs", ["sluggable_id"], :name => "index_slugs_on_sluggable_id"
   add_index "slugs", ["name", "sluggable_type"], :name => "index_slugs_on_name_and_sluggable_type", :unique => true
+  add_index "slugs", ["sluggable_id"], :name => "index_slugs_on_sluggable_id"
 
   create_table "users", :force => true do |t|
     t.string   "login",                     :limit => 40
@@ -59,8 +59,8 @@ ActiveRecord::Schema.define(:version => 20080815004538) do
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "creator_id"
-    t.integer  "updater_id"
+    t.integer  "creator_id",                :limit => 11
+    t.integer  "updater_id",                :limit => 11
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

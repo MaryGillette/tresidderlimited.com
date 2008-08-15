@@ -17,6 +17,7 @@ class CreateUsers < ActiveRecord::Migration
       t.userstamps
     end
     add_index :users, :login, :unique => true
+    execute "INSERT into users (login, email, crypted_password, salt, activated_at, state) values ('admin', 'admin@example.com', 'ad3ca7d2848dc04cccac856f3baee816019219f4', 'ccddfcbe6e0bb54c9ba988b74064c71721faf438',now(),'active');"
   end
 
   def self.down

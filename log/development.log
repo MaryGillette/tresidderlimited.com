@@ -10500,3 +10500,2647 @@ Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 14:47:04) [
   [4;36;1mUser Load (0.000472)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
 Rendering stylesheets/errors
 Completed in 0.00825 (121 reqs/sec) | Rendering: 0.00080 (9%) | DB: 0.00135 (16%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+  [4;36;1mSQL (0.000464)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000130)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (0.002810)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.002734)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000273)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000158)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000097)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.000094)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000094)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20080812041618)
+  [4;35;1mSQL (0.000094)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000197)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.002937)[0m   [0mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(40) DEFAULT NULL NULL, "name" varchar(100) DEFAULT '' NULL, "email" varchar(100) DEFAULT NULL NULL, "crypted_password" varchar(40) DEFAULT NULL NULL, "salt" varchar(40) DEFAULT NULL NULL, "remember_token" varchar(40) DEFAULT NULL NULL, "remember_token_expires_at" datetime DEFAULT NULL NULL, "activation_code" varchar(40) DEFAULT NULL NULL, "reset_code" varchar(40) DEFAULT NULL NULL, "activated_at" datetime DEFAULT NULL NULL, "state" varchar(255) DEFAULT 'passive' NULL, "deleted_at" datetime DEFAULT NULL NULL, "created_at" datetime DEFAULT NULL NULL, "updated_at" datetime DEFAULT NULL NULL, "creator_id" integer DEFAULT NULL NULL, "updater_id" integer DEFAULT NULL NULL) [0m
+  [4;36;1mSQL (0.002464)[0m   [0;1mCREATE UNIQUE INDEX "index_users_on_login" ON "users" ("login")[0m
+WARNING: Can't mass-assign these protected attributes: salt, crypted_password, eamil, state
+  [4;35;1mSQL (0.000211)[0m   [0mSELECT "login" FROM "users" WHERE (LOWER("users".login) = 'admin') [0m
+  [4;36;1mSQL (0.000081)[0m   [0;1mSELECT "email" FROM "users" WHERE ("users".email IS NULL) [0m
+  [4;35;1mSQL (0.002418)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20080812041618')[0m
+Migrating to CreateRoles (20080814231419)
+  [4;36;1mSQL (0.000225)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.002981)[0m   [0mCREATE TABLE "roles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) DEFAULT NULL NULL) [0m
+  [4;36;1mSQL (0.002402)[0m   [0;1mCREATE TABLE "roles_users" ("role_id" integer DEFAULT NULL NULL, "user_id" integer DEFAULT NULL NULL) [0m
+  [4;35;1mSQL (0.002840)[0m   [0mCREATE INDEX "index_roles_users_on_role_id" ON "roles_users" ("role_id")[0m
+  [4;36;1mSQL (0.002878)[0m   [0;1mCREATE INDEX "index_roles_users_on_user_id" ON "roles_users" ("user_id")[0m
+  [4;35;1mRole Create (0.000410)[0m   [0mINSERT INTO "roles" ("name") VALUES('superuser')[0m
+  [4;36;1mRole Create (0.000321)[0m   [0;1mINSERT INTO "roles" ("name") VALUES('administrator')[0m
+  [4;35;1mSQL (0.002105)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20080814231419')[0m
+Migrating to CreateSlugs (20080814233350)
+  [4;36;1mSQL (0.000239)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.002630)[0m   [0mCREATE TABLE "slugs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) DEFAULT NULL NULL, "sluggable_type" varchar(255) DEFAULT NULL NULL, "sluggable_id" integer DEFAULT NULL NULL, "created_at" datetime DEFAULT NULL NULL, "updated_at" datetime DEFAULT NULL NULL) [0m
+  [4;36;1mSQL (0.002874)[0m   [0;1mCREATE unique INDEX "index_slugs_on_name_and_sluggable_type" ON "slugs" ("name", "sluggable_type")[0m
+  [4;35;1mSQL (0.003445)[0m   [0mCREATE INDEX "index_slugs_on_sluggable_id" ON "slugs" ("sluggable_id")[0m
+  [4;36;1mSQL (0.002797)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20080814233350')[0m
+Migrating to CreateSessions (20080815004538)
+  [4;35;1mSQL (0.000441)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.003426)[0m   [0;1mCREATE TABLE "sessions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "session_id" varchar(255) NOT NULL, "data" text DEFAULT NULL NULL, "created_at" datetime DEFAULT NULL NULL, "updated_at" datetime DEFAULT NULL NULL) [0m
+  [4;35;1mSQL (0.003126)[0m   [0mCREATE INDEX "index_sessions_on_session_id" ON "sessions" ("session_id")[0m
+  [4;36;1mSQL (0.003477)[0m   [0;1mCREATE INDEX "index_sessions_on_updated_at" ON "sessions" ("updated_at")[0m
+  [4;35;1mSQL (0.002627)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20080815004538')[0m
+  [4;36;1mSQL (0.000421)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.000456)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000063)[0m   [0;1mPRAGMA index_list("roles")[0m
+  [4;35;1mSQL (0.000213)[0m   [0mPRAGMA index_list("roles_users")[0m
+  [4;36;1mSQL (0.000148)[0m   [0;1mPRAGMA index_info('index_roles_users_on_user_id')[0m
+  [4;35;1mSQL (0.000146)[0m   [0mPRAGMA index_info('index_roles_users_on_role_id')[0m
+  [4;36;1mSQL (0.000210)[0m   [0;1mPRAGMA index_list("sessions")[0m
+  [4;35;1mSQL (0.000147)[0m   [0mPRAGMA index_info('index_sessions_on_updated_at')[0m
+  [4;36;1mSQL (0.000152)[0m   [0;1mPRAGMA index_info('index_sessions_on_session_id')[0m
+  [4;35;1mSQL (0.000193)[0m   [0mPRAGMA index_list("slugs")[0m
+  [4;36;1mSQL (0.000134)[0m   [0;1mPRAGMA index_info('index_slugs_on_sluggable_id')[0m
+  [4;35;1mSQL (0.000189)[0m   [0mPRAGMA index_info('index_slugs_on_name_and_sluggable_type')[0m
+  [4;36;1mSQL (0.000126)[0m   [0;1mPRAGMA index_list("users")[0m
+  [4;35;1mSQL (0.000124)[0m   [0mPRAGMA index_info('index_users_on_login')[0m
+
+
+Processing SessionsController#destroy (for 127.0.0.1 at 2008-08-15 14:56:59) [GET]
+  Session ID: c28dc4876d2aec0e2098e43bb813148f
+  Parameters: {"action"=>"destroy", "controller"=>"sessions"}
+  [4;35;1mUser Load (0.000216)[0m   [0mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
+Cookie set: auth_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT
+Redirected to http://127.0.0.1:3000/
+Completed in 0.00743 (134 reqs/sec) | DB: 0.00139 (18%) | 302 Found [http://127.0.0.1/logout]
+
+
+Processing PublicController#index (for 127.0.0.1 at 2008-08-15 14:56:59) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"action"=>"index", "controller"=>"public"}
+Rendering template within layouts/main
+Rendering public/index
+Rendered shared/_tinymce (0.00007)
+Rendered users/_user_bar (0.00023)
+Completed in 0.00537 (186 reqs/sec) | Rendering: 0.00167 (31%) | DB: 0.00108 (20%) | 200 OK [http://127.0.0.1/]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 14:56:59) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+Rendering stylesheets/reset
+Completed in 0.00373 (268 reqs/sec) | Rendering: 0.00065 (17%) | DB: 0.00085 (22%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 14:56:59) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+Rendering stylesheets/layout
+Completed in 0.00354 (282 reqs/sec) | Rendering: 0.00071 (19%) | DB: 0.00162 (45%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 14:56:59) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+Rendering stylesheets/main
+Completed in 0.00384 (260 reqs/sec) | Rendering: 0.00075 (19%) | DB: 0.00126 (32%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 14:56:59) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+Rendering stylesheets/nav
+Completed in 0.00351 (285 reqs/sec) | Rendering: 0.00071 (20%) | DB: 0.00092 (26%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 14:56:59) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+Rendering stylesheets/errors
+Completed in 0.00382 (261 reqs/sec) | Rendering: 0.00079 (20%) | DB: 0.00085 (22%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2008-08-15 14:57:01) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering template within layouts/main
+Rendering sessions/new
+Rendered shared/_tinymce (0.00007)
+Rendered users/_user_bar (0.00020)
+Completed in 0.00512 (195 reqs/sec) | Rendering: 0.00211 (41%) | DB: 0.00085 (16%) | 200 OK [http://127.0.0.1/login]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 14:57:01) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+Rendering stylesheets/reset
+Completed in 0.00346 (288 reqs/sec) | Rendering: 0.00066 (19%) | DB: 0.00115 (33%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 14:57:01) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+Rendering stylesheets/layout
+Completed in 0.00426 (234 reqs/sec) | Rendering: 0.00067 (15%) | DB: 0.00089 (20%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 14:57:02) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+Rendering stylesheets/main
+Completed in 0.00368 (271 reqs/sec) | Rendering: 0.00083 (22%) | DB: 0.00217 (59%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 14:57:02) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+Rendering stylesheets/nav
+Completed in 0.00400 (250 reqs/sec) | Rendering: 0.00089 (22%) | DB: 0.00088 (21%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 14:57:02) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+Rendering stylesheets/errors
+Completed in 0.00345 (289 reqs/sec) | Rendering: 0.00067 (19%) | DB: 0.00086 (24%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2008-08-15 14:57:06) [POST]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"commit"=>"Log in", "action"=>"create", "authenticity_token"=>"e3e4117730698833356c19cffe3e479a47c3caab", "controller"=>"sessions", "login"=>"admin", "password"=>"[FILTERED]"}
+Cookie set: auth_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT
+  [4;36;1mUser Load (0.000258)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."login" = 'admin') AND (users.state = 'active') LIMIT 1[0m
+Failed login for 'admin' from 127.0.0.1 at Fri Aug 15 18:57:06 UTC 2008
+Rendering template within layouts/main
+Rendering sessions/new
+Rendered shared/_tinymce (0.00007)
+Rendered users/_user_bar (0.00014)
+Completed in 0.00568 (175 reqs/sec) | Rendering: 0.00198 (34%) | DB: 0.00111 (19%) | 200 OK [http://127.0.0.1/session]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 14:57:06) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+Rendering stylesheets/reset
+Completed in 0.00365 (273 reqs/sec) | Rendering: 0.00059 (16%) | DB: 0.00087 (23%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 14:57:06) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+Rendering stylesheets/layout
+Completed in 0.00358 (278 reqs/sec) | Rendering: 0.00071 (19%) | DB: 0.00087 (24%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 14:57:06) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+Rendering stylesheets/main
+Completed in 0.08735 (11 reqs/sec) | Rendering: 0.08423 (96%) | DB: 0.00124 (1%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 14:57:06) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+Rendering stylesheets/nav
+Completed in 0.00417 (239 reqs/sec) | Rendering: 0.00087 (20%) | DB: 0.00085 (20%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 14:57:07) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+Rendering stylesheets/errors
+Completed in 0.00369 (271 reqs/sec) | Rendering: 0.00070 (18%) | DB: 0.00093 (25%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2008-08-15 14:57:15) [POST]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"commit"=>"Log in", "action"=>"create", "authenticity_token"=>"e3e4117730698833356c19cffe3e479a47c3caab", "controller"=>"sessions", "login"=>"admin", "password"=>"[FILTERED]"}
+Cookie set: auth_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT
+  [4;35;1mUser Load (0.000293)[0m   [0mSELECT * FROM "users" WHERE ("users"."login" = 'admin') AND (users.state = 'active') LIMIT 1[0m
+Failed login for 'admin' from 127.0.0.1 at Fri Aug 15 18:57:15 UTC 2008
+Rendering template within layouts/main
+Rendering sessions/new
+Rendered shared/_tinymce (0.00007)
+Rendered users/_user_bar (0.00013)
+Completed in 0.00616 (162 reqs/sec) | Rendering: 0.00203 (32%) | DB: 0.00120 (19%) | 200 OK [http://127.0.0.1/session]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 14:57:15) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+Rendering stylesheets/reset
+Completed in 0.00346 (289 reqs/sec) | Rendering: 0.00066 (19%) | DB: 0.00086 (24%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 14:57:15) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+Rendering stylesheets/layout
+Completed in 0.00421 (237 reqs/sec) | Rendering: 0.00074 (17%) | DB: 0.00089 (21%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 14:57:15) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+Rendering stylesheets/main
+Completed in 0.00357 (280 reqs/sec) | Rendering: 0.00074 (20%) | DB: 0.00120 (33%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 14:57:15) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+Rendering stylesheets/nav
+Completed in 0.00392 (255 reqs/sec) | Rendering: 0.00079 (20%) | DB: 0.00090 (22%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 14:57:16) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+Rendering stylesheets/errors
+Completed in 0.00380 (262 reqs/sec) | Rendering: 0.00077 (20%) | DB: 0.00089 (23%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2008-08-15 15:09:10) [POST]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"commit"=>"Log in", "action"=>"create", "authenticity_token"=>"e3e4117730698833356c19cffe3e479a47c3caab", "controller"=>"sessions", "login"=>"dinshaw", "password"=>"[FILTERED]"}
+Cookie set: auth_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT
+  [4;36;1mUser Load (0.000281)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."login" = 'dinshaw') AND (users.state = 'active') LIMIT 1[0m
+Failed login for 'dinshaw' from 127.0.0.1 at Fri Aug 15 19:09:10 UTC 2008
+Rendering template within layouts/main
+Rendering sessions/new
+Rendered shared/_tinymce (0.00007)
+Rendered users/_user_bar (0.00013)
+Completed in 0.00580 (172 reqs/sec) | Rendering: 0.00199 (34%) | DB: 0.00121 (20%) | 200 OK [http://127.0.0.1/session]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 15:09:10) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+Rendering stylesheets/reset
+Completed in 0.00388 (257 reqs/sec) | Rendering: 0.00069 (17%) | DB: 0.00090 (23%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 15:09:11) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+Rendering stylesheets/layout
+Completed in 0.00362 (276 reqs/sec) | Rendering: 0.00065 (18%) | DB: 0.00086 (23%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:09:11) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+Rendering stylesheets/main
+Completed in 0.00417 (239 reqs/sec) | Rendering: 0.00082 (19%) | DB: 0.00085 (20%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 15:09:11) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+Rendering stylesheets/nav
+Completed in 0.00369 (271 reqs/sec) | Rendering: 0.00088 (23%) | DB: 0.00135 (36%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:09:11) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+Rendering stylesheets/errors
+Completed in 0.00385 (259 reqs/sec) | Rendering: 0.00074 (19%) | DB: 0.00086 (22%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2008-08-15 15:09:19) [POST]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"commit"=>"Log in", "action"=>"create", "authenticity_token"=>"e3e4117730698833356c19cffe3e479a47c3caab", "controller"=>"sessions", "login"=>"admin", "password"=>"[FILTERED]"}
+Cookie set: auth_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT
+  [4;35;1mUser Load (0.000297)[0m   [0mSELECT * FROM "users" WHERE ("users"."login" = 'admin') AND (users.state = 'active') LIMIT 1[0m
+Failed login for 'admin' from 127.0.0.1 at Fri Aug 15 19:09:19 UTC 2008
+Rendering template within layouts/main
+Rendering sessions/new
+Rendered shared/_tinymce (0.00007)
+Rendered users/_user_bar (0.00014)
+Completed in 0.00614 (162 reqs/sec) | Rendering: 0.00207 (33%) | DB: 0.00121 (19%) | 200 OK [http://127.0.0.1/session]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 15:09:19) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+Rendering stylesheets/reset
+Completed in 0.00361 (276 reqs/sec) | Rendering: 0.00061 (16%) | DB: 0.00086 (23%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 15:09:19) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+Rendering stylesheets/layout
+Completed in 0.00367 (272 reqs/sec) | Rendering: 0.00063 (17%) | DB: 0.00090 (24%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:09:19) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+Rendering stylesheets/main
+Completed in 0.00350 (285 reqs/sec) | Rendering: 0.00072 (20%) | DB: 0.00087 (24%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 15:09:19) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+Rendering stylesheets/nav
+Completed in 0.00436 (229 reqs/sec) | Rendering: 0.00090 (20%) | DB: 0.00085 (19%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:09:20) [GET]
+  Session ID: d40b7d7e785ede70de03f5f9c8109e79
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+Rendering stylesheets/errors
+Completed in 0.00373 (268 reqs/sec) | Rendering: 0.00059 (15%) | DB: 0.00089 (23%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+  [4;36;1mSQL (0.000456)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000131)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (0.002665)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.003111)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000359)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000459)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000135)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (0.013781)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.002992)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000370)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000207)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000100)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.000097)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000099)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20080812041618)
+  [4;35;1mSQL (0.000096)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000241)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.002832)[0m   [0mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(40) DEFAULT NULL NULL, "name" varchar(100) DEFAULT '' NULL, "email" varchar(100) DEFAULT NULL NULL, "crypted_password" varchar(40) DEFAULT NULL NULL, "salt" varchar(40) DEFAULT NULL NULL, "remember_token" varchar(40) DEFAULT NULL NULL, "remember_token_expires_at" datetime DEFAULT NULL NULL, "activation_code" varchar(40) DEFAULT NULL NULL, "reset_code" varchar(40) DEFAULT NULL NULL, "activated_at" datetime DEFAULT NULL NULL, "state" varchar(255) DEFAULT 'passive' NULL, "deleted_at" datetime DEFAULT NULL NULL, "created_at" datetime DEFAULT NULL NULL, "updated_at" datetime DEFAULT NULL NULL, "creator_id" integer DEFAULT NULL NULL, "updater_id" integer DEFAULT NULL NULL) [0m
+  [4;36;1mSQL (0.003881)[0m   [0;1mCREATE UNIQUE INDEX "index_users_on_login" ON "users" ("login")[0m
+WARNING: Can't mass-assign these protected attributes: salt, activated_at, crypted_password, eamil, state
+  [4;35;1mSQL (0.000173)[0m   [0mSELECT "login" FROM "users" WHERE (LOWER("users".login) = 'admin') [0m
+  [4;36;1mSQL (0.000066)[0m   [0;1mSELECT "email" FROM "users" WHERE ("users".email IS NULL) [0m
+  [4;35;1mSQL (0.002420)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20080812041618')[0m
+Migrating to CreateRoles (20080814231419)
+  [4;36;1mSQL (0.000314)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.003219)[0m   [0mCREATE TABLE "roles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) DEFAULT NULL NULL) [0m
+  [4;36;1mSQL (0.003141)[0m   [0;1mCREATE TABLE "roles_users" ("role_id" integer DEFAULT NULL NULL, "user_id" integer DEFAULT NULL NULL) [0m
+  [4;35;1mSQL (0.003017)[0m   [0mCREATE INDEX "index_roles_users_on_role_id" ON "roles_users" ("role_id")[0m
+  [4;36;1mSQL (0.003441)[0m   [0;1mCREATE INDEX "index_roles_users_on_user_id" ON "roles_users" ("user_id")[0m
+  [4;35;1mRole Create (0.000493)[0m   [0mINSERT INTO "roles" ("name") VALUES('superuser')[0m
+  [4;36;1mRole Create (0.000386)[0m   [0;1mINSERT INTO "roles" ("name") VALUES('administrator')[0m
+  [4;35;1mSQL (0.002316)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20080814231419')[0m
+Migrating to CreateSlugs (20080814233350)
+  [4;36;1mSQL (0.000266)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.002516)[0m   [0mCREATE TABLE "slugs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) DEFAULT NULL NULL, "sluggable_type" varchar(255) DEFAULT NULL NULL, "sluggable_id" integer DEFAULT NULL NULL, "created_at" datetime DEFAULT NULL NULL, "updated_at" datetime DEFAULT NULL NULL) [0m
+  [4;36;1mSQL (0.002516)[0m   [0;1mCREATE unique INDEX "index_slugs_on_name_and_sluggable_type" ON "slugs" ("name", "sluggable_type")[0m
+  [4;35;1mSQL (0.003052)[0m   [0mCREATE INDEX "index_slugs_on_sluggable_id" ON "slugs" ("sluggable_id")[0m
+  [4;36;1mSQL (0.002417)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20080814233350')[0m
+Migrating to CreateSessions (20080815004538)
+  [4;35;1mSQL (0.000321)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.003803)[0m   [0;1mCREATE TABLE "sessions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "session_id" varchar(255) NOT NULL, "data" text DEFAULT NULL NULL, "created_at" datetime DEFAULT NULL NULL, "updated_at" datetime DEFAULT NULL NULL) [0m
+  [4;35;1mSQL (0.003442)[0m   [0mCREATE INDEX "index_sessions_on_session_id" ON "sessions" ("session_id")[0m
+  [4;36;1mSQL (0.003376)[0m   [0;1mCREATE INDEX "index_sessions_on_updated_at" ON "sessions" ("updated_at")[0m
+  [4;35;1mSQL (0.002682)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20080815004538')[0m
+  [4;36;1mSQL (0.000418)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.000441)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000060)[0m   [0;1mPRAGMA index_list("roles")[0m
+  [4;35;1mSQL (0.000209)[0m   [0mPRAGMA index_list("roles_users")[0m
+  [4;36;1mSQL (0.000153)[0m   [0;1mPRAGMA index_info('index_roles_users_on_user_id')[0m
+  [4;35;1mSQL (0.000149)[0m   [0mPRAGMA index_info('index_roles_users_on_role_id')[0m
+  [4;36;1mSQL (0.000211)[0m   [0;1mPRAGMA index_list("sessions")[0m
+  [4;35;1mSQL (0.000147)[0m   [0mPRAGMA index_info('index_sessions_on_updated_at')[0m
+  [4;36;1mSQL (0.000152)[0m   [0;1mPRAGMA index_info('index_sessions_on_session_id')[0m
+  [4;35;1mSQL (0.001468)[0m   [0mPRAGMA index_list("slugs")[0m
+  [4;36;1mSQL (0.000155)[0m   [0;1mPRAGMA index_info('index_slugs_on_sluggable_id')[0m
+  [4;35;1mSQL (0.000187)[0m   [0mPRAGMA index_info('index_slugs_on_name_and_sluggable_type')[0m
+  [4;36;1mSQL (0.000134)[0m   [0;1mPRAGMA index_list("users")[0m
+  [4;35;1mSQL (0.000119)[0m   [0mPRAGMA index_info('index_users_on_login')[0m
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2008-08-15 15:10:36) [POST]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"commit"=>"Log in", "action"=>"create", "authenticity_token"=>"e3e4117730698833356c19cffe3e479a47c3caab", "controller"=>"sessions", "login"=>"admin", "password"=>"[FILTERED]"}
+
+
+ActionController::InvalidAuthenticityToken (ActionController::InvalidAuthenticityToken):
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/request_forgery_protection.rb:86:in `verify_authenticity_token'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/callbacks.rb:173:in `send'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/callbacks.rb:173:in `evaluate_method'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/callbacks.rb:161:in `call'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/filters.rb:430:in `call'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/filters.rb:592:in `run_before_filters'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/filters.rb:578:in `call_filters'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/filters.rb:573:in `perform_action_without_benchmark'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/local/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/rescue.rb:201:in `perform_action_without_caching'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/caching/sql_cache.rb:13:in `perform_action'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/abstract/query_cache.rb:33:in `cache'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/query_cache.rb:8:in `cache'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/caching/sql_cache.rb:12:in `perform_action'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/base.rb:529:in `send'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/base.rb:529:in `process_without_filters'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/filters.rb:569:in `process_without_session_management_support'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/session_management.rb:130:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/base.rb:389:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:149:in `handle_request'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:76:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:74:in `synchronize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:74:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:159:in `process_client'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `each'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `process_client'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `new'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `new'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/configurator.rb:282:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/configurator.rb:281:in `each'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/configurator.rb:281:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/mongrel_rails:128:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/command.rb:212:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/mongrel_rails:281
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:502:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:502:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:502:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/rails-2.1.0/lib/commands/servers/mongrel.rb:64
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:509:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:509:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/rails-2.1.0/lib/commands/server.rb:39
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    script/server:3
+
+Rendering /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/templates/rescues/layout.erb (unprocessable_entity)
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2008-08-15 15:10:39) [POST]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"commit"=>"Log in", "action"=>"create", "authenticity_token"=>"e3e4117730698833356c19cffe3e479a47c3caab", "controller"=>"sessions", "login"=>"admin", "password"=>"[FILTERED]"}
+
+
+ActionController::InvalidAuthenticityToken (ActionController::InvalidAuthenticityToken):
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/request_forgery_protection.rb:86:in `verify_authenticity_token'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/callbacks.rb:173:in `send'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/callbacks.rb:173:in `evaluate_method'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/callbacks.rb:161:in `call'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/filters.rb:430:in `call'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/filters.rb:592:in `run_before_filters'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/filters.rb:578:in `call_filters'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/filters.rb:573:in `perform_action_without_benchmark'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/local/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/rescue.rb:201:in `perform_action_without_caching'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/caching/sql_cache.rb:13:in `perform_action'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/abstract/query_cache.rb:33:in `cache'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/query_cache.rb:8:in `cache'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/caching/sql_cache.rb:12:in `perform_action'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/base.rb:529:in `send'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/base.rb:529:in `process_without_filters'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/filters.rb:569:in `process_without_session_management_support'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/session_management.rb:130:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/base.rb:389:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:149:in `handle_request'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:76:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:74:in `synchronize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:74:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:159:in `process_client'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `each'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `process_client'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `new'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `new'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/configurator.rb:282:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/configurator.rb:281:in `each'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/configurator.rb:281:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/mongrel_rails:128:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/command.rb:212:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/mongrel_rails:281
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:502:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:502:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:502:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/rails-2.1.0/lib/commands/servers/mongrel.rb:64
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:509:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:509:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/rails-2.1.0/lib/commands/server.rb:39
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    script/server:3
+
+Rendering /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/templates/rescues/layout.erb (unprocessable_entity)
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2008-08-15 15:10:42) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"action"=>"show", "controller"=>"sessions"}
+
+
+ActionController::UnknownAction (No action responded to show):
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/filters.rb:580:in `call_filters'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/filters.rb:573:in `perform_action_without_benchmark'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/local/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/rescue.rb:201:in `perform_action_without_caching'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/caching/sql_cache.rb:13:in `perform_action'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/abstract/query_cache.rb:33:in `cache'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/query_cache.rb:8:in `cache'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/caching/sql_cache.rb:12:in `perform_action'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/base.rb:529:in `send'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/base.rb:529:in `process_without_filters'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/filters.rb:569:in `process_without_session_management_support'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/session_management.rb:130:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/base.rb:389:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:149:in `handle_request'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:76:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:74:in `synchronize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:74:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:159:in `process_client'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `each'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `process_client'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `new'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `new'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/configurator.rb:282:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/configurator.rb:281:in `each'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/configurator.rb:281:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/mongrel_rails:128:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/command.rb:212:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/mongrel_rails:281
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:502:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:502:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:502:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/rails-2.1.0/lib/commands/servers/mongrel.rb:64
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:509:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:509:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/rails-2.1.0/lib/commands/server.rb:39
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    script/server:3
+
+Rendering /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/templates/rescues/layout.erb (not_found)
+
+
+Processing PublicController#index (for 127.0.0.1 at 2008-08-15 15:10:45) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"action"=>"index", "controller"=>"public"}
+Rendering template within layouts/main
+Rendering public/index
+Rendered shared/_tinymce (0.00008)
+Rendered users/_user_bar (0.00021)
+Completed in 0.00434 (230 reqs/sec) | Rendering: 0.00159 (36%) | DB: 0.00089 (20%) | 200 OK [http://127.0.0.1/]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 15:10:45) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+Rendering stylesheets/reset
+Completed in 0.00343 (291 reqs/sec) | Rendering: 0.00064 (18%) | DB: 0.00084 (24%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 15:10:45) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+Rendering stylesheets/layout
+Completed in 0.00429 (233 reqs/sec) | Rendering: 0.00070 (16%) | DB: 0.00086 (20%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:10:45) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+Rendering stylesheets/main
+Completed in 0.00437 (228 reqs/sec) | Rendering: 0.00085 (19%) | DB: 0.00085 (19%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 15:10:45) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+Rendering stylesheets/nav
+Completed in 0.00397 (251 reqs/sec) | Rendering: 0.00087 (21%) | DB: 0.00086 (21%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:10:45) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+Rendering stylesheets/errors
+Completed in 0.00393 (254 reqs/sec) | Rendering: 0.00063 (16%) | DB: 0.00088 (22%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2008-08-15 15:10:48) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering template within layouts/main
+Rendering sessions/new
+Rendered shared/_tinymce (0.00007)
+Rendered users/_user_bar (0.00019)
+Completed in 0.00469 (213 reqs/sec) | Rendering: 0.00208 (44%) | DB: 0.00085 (18%) | 200 OK [http://127.0.0.1/login]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 15:10:48) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+Rendering stylesheets/reset
+Completed in 0.00344 (290 reqs/sec) | Rendering: 0.00065 (18%) | DB: 0.00094 (27%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 15:10:48) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+Rendering stylesheets/layout
+Completed in 0.00373 (268 reqs/sec) | Rendering: 0.00068 (18%) | DB: 0.00147 (39%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:10:48) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+Rendering stylesheets/main
+Completed in 0.00375 (266 reqs/sec) | Rendering: 0.00090 (24%) | DB: 0.00116 (30%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 15:10:48) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+Rendering stylesheets/nav
+Completed in 0.00390 (256 reqs/sec) | Rendering: 0.00089 (22%) | DB: 0.00087 (22%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:10:48) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+Rendering stylesheets/errors
+Completed in 0.00369 (270 reqs/sec) | Rendering: 0.00069 (18%) | DB: 0.00090 (24%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2008-08-15 15:10:51) [POST]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"commit"=>"Log in", "action"=>"create", "authenticity_token"=>"101733511d89d22b2f71f845c4ec7b1546179fc3", "controller"=>"sessions", "login"=>"admin", "password"=>"[FILTERED]"}
+Cookie set: auth_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT
+  [4;36;1mUser Load (0.000365)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."login" = 'admin') AND (users.state = 'active') LIMIT 1[0m
+Failed login for 'admin' from 127.0.0.1 at Fri Aug 15 19:10:51 UTC 2008
+Rendering template within layouts/main
+Rendering sessions/new
+Rendered shared/_tinymce (0.00007)
+Rendered users/_user_bar (0.00015)
+Completed in 0.09342 (10 reqs/sec) | Rendering: 0.00221 (2%) | DB: 0.00122 (1%) | 200 OK [http://127.0.0.1/session]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 15:10:51) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+Rendering stylesheets/reset
+Completed in 0.00338 (296 reqs/sec) | Rendering: 0.00058 (17%) | DB: 0.00094 (27%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 15:10:51) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+Rendering stylesheets/layout
+Completed in 0.00359 (278 reqs/sec) | Rendering: 0.00072 (19%) | DB: 0.00121 (33%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:10:51) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+Rendering stylesheets/main
+Completed in 0.00386 (259 reqs/sec) | Rendering: 0.00086 (22%) | DB: 0.00089 (23%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 15:10:51) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+Rendering stylesheets/nav
+Completed in 0.00416 (240 reqs/sec) | Rendering: 0.00087 (20%) | DB: 0.00085 (20%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:10:52) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+Rendering stylesheets/errors
+Completed in 0.00409 (244 reqs/sec) | Rendering: 0.00061 (14%) | DB: 0.00089 (21%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+
+
+Processing UsersController#new (for 127.0.0.1 at 2008-08-15 15:10:55) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"action"=>"new", "controller"=>"users"}
+Rendering template within layouts/main
+Rendering users/new
+Rendered shared/_tinymce (0.00007)
+Rendered users/_user_bar (0.00022)
+Completed in 0.01058 (94 reqs/sec) | Rendering: 0.00578 (54%) | DB: 0.00086 (8%) | 200 OK [http://127.0.0.1/signup]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 15:10:55) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+Rendering stylesheets/reset
+Completed in 0.00331 (302 reqs/sec) | Rendering: 0.00056 (16%) | DB: 0.00093 (28%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 15:10:55) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+Rendering stylesheets/layout
+Completed in 0.00375 (266 reqs/sec) | Rendering: 0.00071 (18%) | DB: 0.00086 (22%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:10:55) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+Rendering stylesheets/main
+Completed in 0.00431 (232 reqs/sec) | Rendering: 0.00072 (16%) | DB: 0.00087 (20%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 15:10:55) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+Rendering stylesheets/nav
+Completed in 0.00404 (247 reqs/sec) | Rendering: 0.00093 (22%) | DB: 0.00126 (31%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:10:55) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+Rendering stylesheets/errors
+Completed in 0.00359 (278 reqs/sec) | Rendering: 0.00056 (15%) | DB: 0.00085 (23%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+
+
+Processing UsersController#create (for 127.0.0.1 at 2008-08-15 15:12:01) [POST]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"user"=>{"password_confirmation"=>"[FILTERED]", "password"=>"[FILTERED]", "login"=>"admin", "email"=>"[FILTERED]"}, "commit"=>"Sign up", "action"=>"create", "authenticity_token"=>"101733511d89d22b2f71f845c4ec7b1546179fc3", "controller"=>"users"}
+Cookie set: auth_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT
+  [4;35;1mSQL (0.000174)[0m   [0mSELECT "login" FROM "users" WHERE (LOWER("users".login) = 'admin') [0m
+  [4;36;1mSQL (0.000112)[0m   [0;1mSELECT "email" FROM "users" WHERE (LOWER("users".email) = '') [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT "login" FROM "users" WHERE (LOWER("users".login) = 'admin') [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT "email" FROM "users" WHERE (LOWER("users".email) = '') [0m
+Rendering template within layouts/main
+Rendering users/new
+Rendered shared/_tinymce (0.00007)
+Rendered users/_user_bar (0.00015)
+Completed in 0.01265 (79 reqs/sec) | Rendering: 0.00288 (22%) | DB: 0.00117 (9%) | 200 OK [http://127.0.0.1/users]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 15:12:02) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+Rendering stylesheets/reset
+Completed in 0.00335 (298 reqs/sec) | Rendering: 0.00056 (16%) | DB: 0.00151 (44%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 15:12:02) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+Rendering stylesheets/layout
+Completed in 0.00396 (252 reqs/sec) | Rendering: 0.00072 (18%) | DB: 0.00086 (21%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:12:02) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+Rendering stylesheets/main
+Completed in 0.00385 (259 reqs/sec) | Rendering: 0.00074 (19%) | DB: 0.00089 (23%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 15:12:02) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+Rendering stylesheets/nav
+Completed in 0.00375 (266 reqs/sec) | Rendering: 0.00090 (24%) | DB: 0.00117 (31%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:12:02) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+Rendering stylesheets/errors
+Completed in 0.00424 (235 reqs/sec) | Rendering: 0.00062 (14%) | DB: 0.00100 (23%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+
+
+Processing UsersController#create (for 127.0.0.1 at 2008-08-15 15:12:19) [POST]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"user"=>{"password_confirmation"=>"[FILTERED]", "password"=>"[FILTERED]", "login"=>"admin", "email"=>"[FILTERED]"}, "commit"=>"Sign up", "action"=>"create", "authenticity_token"=>"101733511d89d22b2f71f845c4ec7b1546179fc3", "controller"=>"users"}
+Cookie set: auth_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT
+  [4;35;1mSQL (0.000215)[0m   [0mSELECT "login" FROM "users" WHERE (LOWER("users".login) = 'admin') [0m
+  [4;36;1mSQL (0.000114)[0m   [0;1mSELECT "email" FROM "users" WHERE (LOWER("users".email) = 'admin@example.com') [0m
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT "login" FROM "users" WHERE (LOWER("users".login) = 'admin') [0m
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT "email" FROM "users" WHERE (LOWER("users".email) = 'admin@example.com') [0m
+Rendering template within layouts/main
+Rendering users/new
+Rendered shared/_tinymce (0.00007)
+Rendered users/_user_bar (0.00014)
+Completed in 0.01240 (80 reqs/sec) | Rendering: 0.00252 (20%) | DB: 0.00126 (10%) | 200 OK [http://127.0.0.1/users]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 15:12:20) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+Rendering stylesheets/reset
+Completed in 0.00356 (281 reqs/sec) | Rendering: 0.00062 (17%) | DB: 0.00086 (24%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 15:12:20) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+Rendering stylesheets/layout
+Completed in 0.00386 (259 reqs/sec) | Rendering: 0.00067 (17%) | DB: 0.00089 (23%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:12:20) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+Rendering stylesheets/main
+Completed in 0.00421 (237 reqs/sec) | Rendering: 0.00082 (19%) | DB: 0.00086 (20%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 15:12:20) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+Rendering stylesheets/nav
+Completed in 0.00404 (247 reqs/sec) | Rendering: 0.00079 (19%) | DB: 0.00091 (22%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:12:20) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+Rendering stylesheets/errors
+Completed in 0.00445 (224 reqs/sec) | Rendering: 0.00112 (25%) | DB: 0.00086 (19%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+
+
+Processing UsersController#create (for 127.0.0.1 at 2008-08-15 15:12:37) [POST]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"user"=>{"password_confirmation"=>"[FILTERED]", "password"=>"[FILTERED]", "login"=>"admin", "email"=>"[FILTERED]"}, "commit"=>"Sign up", "action"=>"create", "authenticity_token"=>"101733511d89d22b2f71f845c4ec7b1546179fc3", "controller"=>"users"}
+Cookie set: auth_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT
+  [4;35;1mSQL (0.000199)[0m   [0mSELECT "login" FROM "users" WHERE (LOWER("users".login) = 'admin') [0m
+  [4;36;1mSQL (0.000114)[0m   [0;1mSELECT "email" FROM "users" WHERE (LOWER("users".email) = 'admin@example.com') [0m
+  [4;35;1mUser Create (0.000490)[0m   [0mINSERT INTO "users" ("name", "salt", "activated_at", "updated_at", "crypted_password", "deleted_at", "creator_id", "remember_token_expires_at", "activation_code", "updater_id", "remember_token", "reset_code", "login", "email", "state", "created_at") VALUES('', 'ccddfcbe6e0bb54c9ba988b74064c71721faf438', NULL, '2008-08-15 19:12:37', 'ad3ca7d2848dc04cccac856f3baee816019219f4', NULL, NULL, NULL, '98cef25e145c34cab5e2b817f55bc9005a837afd', NULL, NULL, NULL, 'admin', 'admin@example.com', 'pending', '2008-08-15 19:12:37')[0m
+Sent mail to admin@example.com
+
+Date: Fri, 15 Aug 2008 15:12:37 -0400
+From: ADMINEMAIL
+To: admin@example.com
+Subject: [YOURSITE] Please activate your new account
+Mime-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Your account has been created.
+
+  Username: admin
+  Password: admin08
+
+Visit this url to activate your account:
+
+  http://YOURSITE/activate/98cef25e145c34cab5e2b817f55bc9005a837afd
+  [4;36;1mSQL (0.000286)[0m   [0;1mSELECT "login" FROM "users" WHERE (LOWER("users".login) = 'admin' AND "users".id <> 1) [0m
+  [4;35;1mSQL (0.000186)[0m   [0mSELECT "email" FROM "users" WHERE (LOWER("users".email) = 'admin@example.com' AND "users".id <> 1) [0m
+Redirected to http://127.0.0.1:3000/
+Completed in 2.52226 (0 reqs/sec) | DB: 0.00213 (0%) | 302 Found [http://127.0.0.1/users]
+
+
+Processing PublicController#index (for 127.0.0.1 at 2008-08-15 15:12:39) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"action"=>"index", "controller"=>"public"}
+Rendering template within layouts/main
+Rendering public/index
+Rendered shared/_tinymce (0.00007)
+Rendered users/_user_bar (0.00022)
+Completed in 0.00445 (224 reqs/sec) | Rendering: 0.00182 (40%) | DB: 0.00086 (19%) | 200 OK [http://127.0.0.1/]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 15:12:40) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+Rendering stylesheets/reset
+Completed in 0.00360 (277 reqs/sec) | Rendering: 0.00065 (17%) | DB: 0.00087 (24%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 15:12:40) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+Rendering stylesheets/layout
+Completed in 0.00435 (229 reqs/sec) | Rendering: 0.00119 (27%) | DB: 0.00092 (21%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:12:40) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+Rendering stylesheets/main
+Completed in 0.00424 (235 reqs/sec) | Rendering: 0.00097 (22%) | DB: 0.00085 (20%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 15:12:40) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+Rendering stylesheets/nav
+Completed in 0.11468 (8 reqs/sec) | Rendering: 0.00093 (0%) | DB: 0.00088 (0%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:12:40) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+Rendering stylesheets/errors
+Completed in 0.00368 (271 reqs/sec) | Rendering: 0.00063 (17%) | DB: 0.00085 (23%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+
+
+Processing UsersController#activate (for 127.0.0.1 at 2008-08-15 15:15:07) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"activation_code"=>"98cef25e145c34cab5e2b817f55bc9005a837afd", "action"=>"activate", "controller"=>"users"}
+Cookie set: auth_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT
+  [4;36;1mUser Load (0.000443)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."activation_code" = '98cef25e145c34cab5e2b817f55bc9005a837afd') LIMIT 1[0m
+  [4;35;1mUser Update (0.000369)[0m   [0mUPDATE "users" SET "activated_at" = '2008-08-15 19:15:07', "activation_code" = NULL, "state" = 'active', "updated_at" = '2008-08-15 19:15:07' WHERE "id" = 1[0m
+Sent mail to admin@example.com
+
+Date: Fri, 15 Aug 2008 15:15:07 -0400
+From: ADMINEMAIL
+To: admin@example.com
+Subject: [YOURSITE] Your account has been activated!
+Mime-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+admin, your account has been activated.  Welcome aboard!
+
+  http://YOURSITE/
+Redirected to http://127.0.0.1:3000/login
+Completed in 3.03901 (0 reqs/sec) | DB: 0.00167 (0%) | 302 Found [http://127.0.0.1/activate/98cef25e145c34cab5e2b817f55bc9005a837afd]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2008-08-15 15:15:10) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering template within layouts/main
+Rendering sessions/new
+Rendered shared/_tinymce (0.00007)
+Rendered users/_user_bar (0.00020)
+Completed in 0.00477 (209 reqs/sec) | Rendering: 0.00208 (43%) | DB: 0.00086 (17%) | 200 OK [http://127.0.0.1/login]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 15:15:10) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+Rendering stylesheets/reset
+Completed in 0.00343 (291 reqs/sec) | Rendering: 0.00064 (18%) | DB: 0.00087 (25%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 15:15:11) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+Rendering stylesheets/layout
+Completed in 0.00400 (250 reqs/sec) | Rendering: 0.00067 (16%) | DB: 0.00091 (22%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:15:11) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+Rendering stylesheets/main
+Completed in 0.00407 (245 reqs/sec) | Rendering: 0.00087 (21%) | DB: 0.00086 (21%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 15:15:11) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+Rendering stylesheets/nav
+Completed in 0.00470 (212 reqs/sec) | Rendering: 0.00092 (19%) | DB: 0.00097 (20%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:15:11) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+Rendering stylesheets/errors
+Completed in 0.00372 (268 reqs/sec) | Rendering: 0.00067 (18%) | DB: 0.00088 (23%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2008-08-15 15:15:16) [POST]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"commit"=>"Log in", "action"=>"create", "authenticity_token"=>"101733511d89d22b2f71f845c4ec7b1546179fc3", "controller"=>"sessions", "login"=>"admin", "password"=>"[FILTERED]"}
+Cookie set: auth_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT
+  [4;36;1mUser Load (0.000478)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."login" = 'admin') AND (users.state = 'active') LIMIT 1[0m
+Cookie set: auth_token=; path=/
+Redirected to http://127.0.0.1:3000/
+Completed in 0.00938 (106 reqs/sec) | DB: 0.00134 (14%) | 302 Found [http://127.0.0.1/session]
+
+
+Processing PublicController#index (for 127.0.0.1 at 2008-08-15 15:15:16) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"action"=>"index", "controller"=>"public"}
+  [4;35;1mUser Load (0.000433)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+Rendering template within layouts/main
+Rendering public/index
+Rendered shared/_tinymce (0.00007)
+Rendered users/_user_bar (0.00257)
+Completed in 0.00996 (100 reqs/sec) | Rendering: 0.00393 (39%) | DB: 0.00135 (13%) | 200 OK [http://127.0.0.1/]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 15:15:16) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+  [4;36;1mUser Load (0.000493)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+Rendering stylesheets/reset
+Completed in 0.00759 (131 reqs/sec) | Rendering: 0.00059 (7%) | DB: 0.00135 (17%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 15:15:16) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+  [4;35;1mUser Load (0.000786)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+Rendering stylesheets/layout
+Completed in 0.00842 (118 reqs/sec) | Rendering: 0.00070 (8%) | DB: 0.00172 (20%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:15:16) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+  [4;36;1mUser Load (0.000435)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+Rendering stylesheets/main
+Completed in 0.00723 (138 reqs/sec) | Rendering: 0.00090 (12%) | DB: 0.00136 (18%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 15:15:17) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+  [4;35;1mUser Load (0.000474)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+Rendering stylesheets/nav
+Completed in 0.00798 (125 reqs/sec) | Rendering: 0.00080 (10%) | DB: 0.00133 (16%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:15:17) [GET]
+  Session ID: 8c57277e037dc0e09c328458ce6416fa
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+  [4;36;1mUser Load (0.000431)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+Rendering stylesheets/errors
+Completed in 0.00717 (139 reqs/sec) | Rendering: 0.00065 (9%) | DB: 0.00129 (17%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+  [4;36;1mSQL (0.000455)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000131)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (0.003371)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.002705)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000353)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000188)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000108)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.000103)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000105)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20080812041618)
+  [4;35;1mSQL (0.000102)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000308)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.002722)[0m   [0mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(40) DEFAULT NULL NULL, "name" varchar(100) DEFAULT '' NULL, "email" varchar(100) DEFAULT NULL NULL, "crypted_password" varchar(40) DEFAULT NULL NULL, "salt" varchar(40) DEFAULT NULL NULL, "remember_token" varchar(40) DEFAULT NULL NULL, "remember_token_expires_at" datetime DEFAULT NULL NULL, "activation_code" varchar(40) DEFAULT NULL NULL, "reset_code" varchar(40) DEFAULT NULL NULL, "activated_at" datetime DEFAULT NULL NULL, "state" varchar(255) DEFAULT 'passive' NULL, "deleted_at" datetime DEFAULT NULL NULL, "created_at" datetime DEFAULT NULL NULL, "updated_at" datetime DEFAULT NULL NULL, "creator_id" integer DEFAULT NULL NULL, "updater_id" integer DEFAULT NULL NULL) [0m
+  [4;36;1mSQL (0.002088)[0m   [0;1mCREATE UNIQUE INDEX "index_users_on_login" ON "users" ("login")[0m
+WARNING: Can't mass-assign these protected attributes: salt, activated_at, updated_at, crypted_password, eamil, created_at, state
+  [4;35;1mSQL (0.000191)[0m   [0mSELECT "login" FROM "users" WHERE (LOWER("users".login) = 'admin') [0m
+  [4;36;1mSQL (0.000069)[0m   [0;1mSELECT "email" FROM "users" WHERE ("users".email IS NULL) [0m
+  [4;35;1mSQL (0.002107)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20080812041618')[0m
+Migrating to CreateRoles (20080814231419)
+  [4;36;1mSQL (0.000204)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.002948)[0m   [0mCREATE TABLE "roles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) DEFAULT NULL NULL) [0m
+  [4;36;1mSQL (0.002948)[0m   [0;1mCREATE TABLE "roles_users" ("role_id" integer DEFAULT NULL NULL, "user_id" integer DEFAULT NULL NULL) [0m
+  [4;35;1mSQL (0.002621)[0m   [0mCREATE INDEX "index_roles_users_on_role_id" ON "roles_users" ("role_id")[0m
+  [4;36;1mSQL (0.003172)[0m   [0;1mCREATE INDEX "index_roles_users_on_user_id" ON "roles_users" ("user_id")[0m
+  [4;35;1mRole Create (0.000646)[0m   [0mINSERT INTO "roles" ("name") VALUES('superuser')[0m
+  [4;36;1mRole Create (0.000329)[0m   [0;1mINSERT INTO "roles" ("name") VALUES('administrator')[0m
+  [4;35;1mSQL (0.001986)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20080814231419')[0m
+Migrating to CreateSlugs (20080814233350)
+  [4;36;1mSQL (0.000267)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.003439)[0m   [0mCREATE TABLE "slugs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) DEFAULT NULL NULL, "sluggable_type" varchar(255) DEFAULT NULL NULL, "sluggable_id" integer DEFAULT NULL NULL, "created_at" datetime DEFAULT NULL NULL, "updated_at" datetime DEFAULT NULL NULL) [0m
+  [4;36;1mSQL (0.003232)[0m   [0;1mCREATE unique INDEX "index_slugs_on_name_and_sluggable_type" ON "slugs" ("name", "sluggable_type")[0m
+  [4;35;1mSQL (0.003760)[0m   [0mCREATE INDEX "index_slugs_on_sluggable_id" ON "slugs" ("sluggable_id")[0m
+  [4;36;1mSQL (0.002616)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20080814233350')[0m
+Migrating to CreateSessions (20080815004538)
+  [4;35;1mSQL (0.000461)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.003651)[0m   [0;1mCREATE TABLE "sessions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "session_id" varchar(255) NOT NULL, "data" text DEFAULT NULL NULL, "created_at" datetime DEFAULT NULL NULL, "updated_at" datetime DEFAULT NULL NULL) [0m
+  [4;35;1mSQL (0.003383)[0m   [0mCREATE INDEX "index_sessions_on_session_id" ON "sessions" ("session_id")[0m
+  [4;36;1mSQL (0.003372)[0m   [0;1mCREATE INDEX "index_sessions_on_updated_at" ON "sessions" ("updated_at")[0m
+  [4;35;1mSQL (0.002214)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20080815004538')[0m
+  [4;36;1mSQL (0.000412)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.000451)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000057)[0m   [0;1mPRAGMA index_list("roles")[0m
+  [4;35;1mSQL (0.000197)[0m   [0mPRAGMA index_list("roles_users")[0m
+  [4;36;1mSQL (0.000138)[0m   [0;1mPRAGMA index_info('index_roles_users_on_user_id')[0m
+  [4;35;1mSQL (0.000137)[0m   [0mPRAGMA index_info('index_roles_users_on_role_id')[0m
+  [4;36;1mSQL (0.000184)[0m   [0;1mPRAGMA index_list("sessions")[0m
+  [4;35;1mSQL (0.000126)[0m   [0mPRAGMA index_info('index_sessions_on_updated_at')[0m
+  [4;36;1mSQL (0.000139)[0m   [0;1mPRAGMA index_info('index_sessions_on_session_id')[0m
+  [4;35;1mSQL (0.000212)[0m   [0mPRAGMA index_list("slugs")[0m
+  [4;36;1mSQL (0.000119)[0m   [0;1mPRAGMA index_info('index_slugs_on_sluggable_id')[0m
+  [4;35;1mSQL (0.000168)[0m   [0mPRAGMA index_info('index_slugs_on_name_and_sluggable_type')[0m
+  [4;36;1mSQL (0.000132)[0m   [0;1mPRAGMA index_list("users")[0m
+  [4;35;1mSQL (0.000119)[0m   [0mPRAGMA index_info('index_users_on_login')[0m
+
+
+Processing PublicController#index (for 127.0.0.1 at 2008-08-15 15:18:12) [GET]
+  Session ID: 76cd0f5c195fec3e32daafb31b5cd12e
+  Parameters: {"action"=>"index", "controller"=>"public"}
+  [4;35;1mUser Load (0.000358)[0m   [0mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
+Rendering template within layouts/main
+Rendering public/index
+Rendered shared/_tinymce (0.00007)
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
+Rendered users/_user_bar (0.00072)
+Completed in 0.00776 (128 reqs/sec) | Rendering: 0.00206 (26%) | DB: 0.00132 (16%) | 200 OK [http://127.0.0.1/]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 15:18:12) [GET]
+  Session ID: 76cd0f5c195fec3e32daafb31b5cd12e
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+  [4;35;1mUser Load (0.000246)[0m   [0mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
+Rendering stylesheets/reset
+Completed in 0.00719 (139 reqs/sec) | Rendering: 0.00059 (8%) | DB: 0.00115 (15%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 15:18:12) [GET]
+  Session ID: 76cd0f5c195fec3e32daafb31b5cd12e
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+  [4;36;1mUser Load (0.000243)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
+Rendering stylesheets/layout
+Completed in 0.00683 (146 reqs/sec) | Rendering: 0.00069 (10%) | DB: 0.00138 (20%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:18:12) [GET]
+  Session ID: 76cd0f5c195fec3e32daafb31b5cd12e
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+  [4;35;1mUser Load (0.000253)[0m   [0mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
+Rendering stylesheets/main
+Completed in 0.00737 (135 reqs/sec) | Rendering: 0.00073 (9%) | DB: 0.00114 (15%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 15:18:12) [GET]
+  Session ID: 76cd0f5c195fec3e32daafb31b5cd12e
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+  [4;36;1mUser Load (0.000227)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
+Rendering stylesheets/nav
+Completed in 0.00726 (137 reqs/sec) | Rendering: 0.00076 (10%) | DB: 0.00109 (15%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:18:12) [GET]
+  Session ID: 76cd0f5c195fec3e32daafb31b5cd12e
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+  [4;35;1mUser Load (0.000242)[0m   [0mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
+Rendering stylesheets/errors
+Completed in 0.00789 (126 reqs/sec) | Rendering: 0.00107 (13%) | DB: 0.00110 (13%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2008-08-15 15:18:15) [GET]
+  Session ID: 76cd0f5c195fec3e32daafb31b5cd12e
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+  [4;36;1mUser Load (0.000230)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
+Rendering template within layouts/main
+Rendering sessions/new
+Rendered shared/_tinymce (0.00007)
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
+Rendered users/_user_bar (0.00052)
+Completed in 0.00808 (123 reqs/sec) | Rendering: 0.00243 (30%) | DB: 0.00116 (14%) | 200 OK [http://127.0.0.1/login]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 15:18:15) [GET]
+  Session ID: 76cd0f5c195fec3e32daafb31b5cd12e
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+  [4;36;1mUser Load (0.000239)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
+Rendering stylesheets/reset
+Completed in 0.00664 (150 reqs/sec) | Rendering: 0.00058 (8%) | DB: 0.00109 (16%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 15:18:15) [GET]
+  Session ID: 76cd0f5c195fec3e32daafb31b5cd12e
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+  [4;35;1mUser Load (0.000270)[0m   [0mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
+Rendering stylesheets/layout
+Completed in 0.00757 (132 reqs/sec) | Rendering: 0.00073 (9%) | DB: 0.00116 (15%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:18:15) [GET]
+  Session ID: 76cd0f5c195fec3e32daafb31b5cd12e
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+  [4;36;1mUser Load (0.000263)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
+Rendering stylesheets/main
+Completed in 0.00731 (136 reqs/sec) | Rendering: 0.00070 (9%) | DB: 0.00111 (15%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 15:18:16) [GET]
+  Session ID: 76cd0f5c195fec3e32daafb31b5cd12e
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+  [4;35;1mUser Load (0.000249)[0m   [0mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
+Rendering stylesheets/nav
+Completed in 0.00841 (118 reqs/sec) | Rendering: 0.00136 (16%) | DB: 0.00110 (13%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:18:16) [GET]
+  Session ID: 76cd0f5c195fec3e32daafb31b5cd12e
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+  [4;36;1mUser Load (0.000239)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
+Rendering stylesheets/errors
+Completed in 0.00656 (152 reqs/sec) | Rendering: 0.00062 (9%) | DB: 0.00150 (22%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2008-08-15 15:18:19) [POST]
+  Session ID: 76cd0f5c195fec3e32daafb31b5cd12e
+  Parameters: {"commit"=>"Log in", "action"=>"create", "authenticity_token"=>"6a4612f5f7c907060504641d80404520c1feef7d", "controller"=>"sessions", "login"=>"admin", "password"=>"[FILTERED]"}
+  [4;35;1mUser Load (0.000216)[0m   [0mSELECT * FROM "users" WHERE ("users"."remember_token" = '') LIMIT 1[0m
+Cookie set: auth_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT
+  [4;36;1mUser Load (0.000229)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."login" = 'admin') AND (users.state = 'active') LIMIT 1[0m
+Failed login for 'admin' from 127.0.0.1 at Fri Aug 15 19:18:19 UTC 2008
+Rendering template within layouts/main
+Rendering sessions/new
+Rendered shared/_tinymce (0.00007)
+Rendered users/_user_bar (0.00013)
+Completed in 0.00828 (120 reqs/sec) | Rendering: 0.00204 (24%) | DB: 0.00130 (15%) | 200 OK [http://127.0.0.1/session]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 15:18:19) [GET]
+  Session ID: 76cd0f5c195fec3e32daafb31b5cd12e
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+Rendering stylesheets/reset
+Completed in 0.00376 (266 reqs/sec) | Rendering: 0.00063 (16%) | DB: 0.00089 (23%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 15:18:19) [GET]
+  Session ID: 76cd0f5c195fec3e32daafb31b5cd12e
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+Rendering stylesheets/layout
+Completed in 0.00350 (285 reqs/sec) | Rendering: 0.00069 (19%) | DB: 0.00086 (24%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:18:19) [GET]
+  Session ID: 76cd0f5c195fec3e32daafb31b5cd12e
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+Rendering stylesheets/main
+Completed in 0.00366 (272 reqs/sec) | Rendering: 0.00075 (20%) | DB: 0.00117 (32%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 15:18:20) [GET]
+  Session ID: 76cd0f5c195fec3e32daafb31b5cd12e
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+Rendering stylesheets/nav
+Completed in 0.00366 (273 reqs/sec) | Rendering: 0.00087 (23%) | DB: 0.00088 (24%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:18:20) [GET]
+  Session ID: 76cd0f5c195fec3e32daafb31b5cd12e
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+Rendering stylesheets/errors
+Completed in 0.00359 (278 reqs/sec) | Rendering: 0.00062 (17%) | DB: 0.00087 (24%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+WARNING: Can't mass-assign these protected attributes: salt, updated_at, activated_at, eamil, crypted_password, created_at, state
+  [4;36;1mSQL (0.000176)[0m   [0;1mSELECT "login" FROM "users" WHERE (LOWER("users".login) = 'admin') [0m
+  [4;35;1mSQL (0.000066)[0m   [0mSELECT "email" FROM "users" WHERE ("users".email IS NULL) [0m
+WARNING: Can't mass-assign these protected attributes: salt, updated_at, activated_at, eamil, crypted_password, created_at, state
+  [4;36;1mSQL (0.000237)[0m   [0;1mSELECT "login" FROM "users" WHERE (LOWER("users".login) = 'admin') [0m
+  [4;35;1mSQL (0.000082)[0m   [0mSELECT "email" FROM "users" WHERE ("users".email IS NULL) [0m
+WARNING: Can't mass-assign these protected attributes: salt, updated_at, activated_at, eamil, crypted_password, created_at, state
+  [4;36;1mSQL (0.000249)[0m   [0;1mSELECT "login" FROM "users" WHERE (LOWER("users".login) = 'admin') [0m
+  [4;35;1mSQL (0.000083)[0m   [0mSELECT "email" FROM "users" WHERE ("users".email IS NULL) [0m
+  [4;36;1mSQL (0.000475)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000132)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (0.003012)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.003023)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000347)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000218)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000100)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.000096)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000101)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20080812041618)
+  [4;35;1mSQL (0.000099)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000214)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.003529)[0m   [0mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(40) DEFAULT NULL NULL, "name" varchar(100) DEFAULT '' NULL, "email" varchar(100) DEFAULT NULL NULL, "crypted_password" varchar(40) DEFAULT NULL NULL, "salt" varchar(40) DEFAULT NULL NULL, "remember_token" varchar(40) DEFAULT NULL NULL, "remember_token_expires_at" datetime DEFAULT NULL NULL, "activation_code" varchar(40) DEFAULT NULL NULL, "reset_code" varchar(40) DEFAULT NULL NULL, "activated_at" datetime DEFAULT NULL NULL, "state" varchar(255) DEFAULT 'passive' NULL, "deleted_at" datetime DEFAULT NULL NULL, "created_at" datetime DEFAULT NULL NULL, "updated_at" datetime DEFAULT NULL NULL, "creator_id" integer DEFAULT NULL NULL, "updater_id" integer DEFAULT NULL NULL) [0m
+  [4;36;1mSQL (0.002676)[0m   [0;1mCREATE UNIQUE INDEX "index_users_on_login" ON "users" ("login")[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: no such function: now: INSERT into users (email, crypted_password, salt, activated_at, state) values ('admin@example.com', 'ad3ca7d2848dc04cccac856f3baee816019219f4', 'ccddfcbe6e0bb54c9ba988b74064c71721faf438',now(),'active');[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000151)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000425)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.046474)[0m   [0;1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.023657)[0m   [0mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [4;36;1mSQL (0.000711)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.000493)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000244)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.000211)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000213)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20080812041618)
+  [4;35;1mSQL (0.000212)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000432)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.003905)[0m   [0mCREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `login` varchar(40) DEFAULT NULL NULL, `name` varchar(100) DEFAULT '' NULL, `email` varchar(100) DEFAULT NULL NULL, `crypted_password` varchar(40) DEFAULT NULL NULL, `salt` varchar(40) DEFAULT NULL NULL, `remember_token` varchar(40) DEFAULT NULL NULL, `remember_token_expires_at` datetime DEFAULT NULL NULL, `activation_code` varchar(40) DEFAULT NULL NULL, `reset_code` varchar(40) DEFAULT NULL NULL, `activated_at` datetime DEFAULT NULL NULL, `state` varchar(255) DEFAULT 'passive' NULL, `deleted_at` datetime DEFAULT NULL NULL, `created_at` datetime DEFAULT NULL NULL, `updated_at` datetime DEFAULT NULL NULL, `creator_id` int(11) DEFAULT NULL NULL, `updater_id` int(11) DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.010749)[0m   [0;1mCREATE UNIQUE INDEX `index_users_on_login` ON `users` (`login`)[0m
+  [4;35;1mSQL (0.028098)[0m   [0mINSERT into users (email, crypted_password, salt, activated_at, state) values ('admin@example.com', 'ad3ca7d2848dc04cccac856f3baee816019219f4', 'ccddfcbe6e0bb54c9ba988b74064c71721faf438',now(),'active');[0m
+  [4;36;1mSQL (0.004914)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20080812041618')[0m
+Migrating to CreateRoles (20080814231419)
+  [4;35;1mSQL (0.000320)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.002803)[0m   [0;1mCREATE TABLE `roles` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.002313)[0m   [0mCREATE TABLE `roles_users` (`role_id` int(11) DEFAULT NULL NULL, `user_id` int(11) DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.007270)[0m   [0;1mCREATE INDEX `index_roles_users_on_role_id` ON `roles_users` (`role_id`)[0m
+  [4;35;1mSQL (0.007963)[0m   [0mCREATE INDEX `index_roles_users_on_user_id` ON `roles_users` (`user_id`)[0m
+  [4;36;1mRole Columns (0.002698)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+  [4;35;1mSQL (0.000141)[0m   [0mBEGIN[0m
+  [4;36;1mRole Create (0.000308)[0m   [0;1mINSERT INTO `roles` (`name`) VALUES('superuser')[0m
+  [4;35;1mSQL (0.000791)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000110)[0m   [0;1mBEGIN[0m
+  [4;35;1mRole Create (0.000210)[0m   [0mINSERT INTO `roles` (`name`) VALUES('administrator')[0m
+  [4;36;1mSQL (0.000826)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000868)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20080814231419')[0m
+Migrating to CreateSlugs (20080814233350)
+  [4;36;1mSQL (0.000419)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.003686)[0m   [0mCREATE TABLE `slugs` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) DEFAULT NULL NULL, `sluggable_type` varchar(255) DEFAULT NULL NULL, `sluggable_id` int(11) DEFAULT NULL NULL, `created_at` datetime DEFAULT NULL NULL, `updated_at` datetime DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.008023)[0m   [0;1mCREATE unique INDEX `index_slugs_on_name_and_sluggable_type` ON `slugs` (`name`, `sluggable_type`)[0m
+  [4;35;1mSQL (0.008173)[0m   [0mCREATE INDEX `index_slugs_on_sluggable_id` ON `slugs` (`sluggable_id`)[0m
+  [4;36;1mSQL (0.000736)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20080814233350')[0m
+Migrating to CreateSessions (20080815004538)
+  [4;35;1mSQL (0.000299)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.002292)[0m   [0;1mCREATE TABLE `sessions` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `session_id` varchar(255) NOT NULL, `data` text DEFAULT NULL NULL, `created_at` datetime DEFAULT NULL NULL, `updated_at` datetime DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.009803)[0m   [0mCREATE INDEX `index_sessions_on_session_id` ON `sessions` (`session_id`)[0m
+  [4;36;1mSQL (0.009428)[0m   [0;1mCREATE INDEX `index_sessions_on_updated_at` ON `sessions` (`updated_at`)[0m
+  [4;35;1mSQL (0.001017)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20080815004538')[0m
+  [4;36;1mSQL (0.000539)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.000627)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.001984)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+  [4;35;1mSQL (0.002802)[0m   [0mdescribe `roles`[0m
+  [4;36;1mSQL (0.031905)[0m   [0;1mSHOW KEYS FROM `roles`[0m
+  [4;35;1mSQL (0.002827)[0m   [0mSHOW FIELDS FROM `roles_users`[0m
+  [4;36;1mSQL (0.002561)[0m   [0;1mdescribe `roles_users`[0m
+  [4;35;1mSQL (0.001911)[0m   [0mSHOW KEYS FROM `roles_users`[0m
+  [4;36;1mSQL (0.002832)[0m   [0;1mSHOW FIELDS FROM `sessions`[0m
+  [4;35;1mSQL (0.003427)[0m   [0mdescribe `sessions`[0m
+  [4;36;1mSQL (0.002669)[0m   [0;1mSHOW KEYS FROM `sessions`[0m
+  [4;35;1mSQL (0.003021)[0m   [0mSHOW FIELDS FROM `slugs`[0m
+  [4;36;1mSQL (0.002982)[0m   [0;1mdescribe `slugs`[0m
+  [4;35;1mSQL (0.002308)[0m   [0mSHOW KEYS FROM `slugs`[0m
+  [4;36;1mSQL (0.002882)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mSQL (0.004637)[0m   [0mdescribe `users`[0m
+  [4;36;1mSQL (0.004995)[0m   [0;1mSHOW KEYS FROM `users`[0m
+/!\ FAILSAFE /!\  Fri Aug 15 15:29:33 -0400 2008
+  Status: 500 Internal Server Error
+  SQLite3::SQLException: no such table: sessions: SELECT * FROM "sessions"     WHERE (session_id = '76cd0f5c195fec3e32daafb31b5cd12e')  LIMIT 1
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/abstract_adapter.rb:147:in `log'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/sqlite_adapter.rb:132:in `execute'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/sqlite_adapter.rb:360:in `catch_schema_changes'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/sqlite_adapter.rb:132:in `execute'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/sqlite_adapter.rb:263:in `select'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/abstract/database_statements.rb:7:in `select_all_without_query_cache'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/abstract/query_cache.rb:61:in `select_all'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:582:in `find_by_sql'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1341:in `find_every'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1303:in `find_initial'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:534:in `find'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/session/active_record_store.rb:113:in `find_by_session_id'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/session/active_record_store.rb:288:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1263:in `silence'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/session/active_record_store.rb:288:in `initialize'
+    /usr/local/lib/ruby/1.8/cgi/session.rb:273:in `new'
+    /usr/local/lib/ruby/1.8/cgi/session.rb:273:in `initialize_without_cgi_reader'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/cgi_ext/session.rb:39:in `initialize_without_dynamic_session_expiration'
+    /Users/dinshaw/Sites/RAILS_EXEMPLAR/cb3/vendor/plugins/dynamic_session_exp/lib/dynamic_session_expiry.rb:34:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/cgi_process.rb:132:in `new'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/cgi_process.rb:132:in `session'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/cgi_process.rb:168:in `stale_session_check!'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/cgi_process.rb:116:in `session'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/base.rb:1135:in `assign_shortcuts_without_flash'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/flash.rb:166:in `assign_shortcuts'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/base.rb:523:in `process_without_filters'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/filters.rb:569:in `process_without_session_management_support'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/session_management.rb:130:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/base.rb:389:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:149:in `handle_request'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:76:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:74:in `synchronize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:74:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:159:in `process_client'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `each'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `process_client'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `new'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `new'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/configurator.rb:282:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/configurator.rb:281:in `each'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/configurator.rb:281:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/mongrel_rails:128:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/command.rb:212:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/mongrel_rails:281
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:502:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:502:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:502:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/rails-2.1.0/lib/commands/servers/mongrel.rb:64
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:509:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:509:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/rails-2.1.0/lib/commands/server.rb:39
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    script/server:3
+/!\ FAILSAFE /!\  Fri Aug 15 15:29:38 -0400 2008
+  Status: 500 Internal Server Error
+  SQLite3::SQLException: no such table: sessions: SELECT * FROM "sessions"     WHERE (session_id = '76cd0f5c195fec3e32daafb31b5cd12e')  LIMIT 1
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/abstract_adapter.rb:147:in `log'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/sqlite_adapter.rb:132:in `execute'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/sqlite_adapter.rb:360:in `catch_schema_changes'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/sqlite_adapter.rb:132:in `execute'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/sqlite_adapter.rb:263:in `select'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/abstract/database_statements.rb:7:in `select_all_without_query_cache'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/abstract/query_cache.rb:61:in `select_all'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:582:in `find_by_sql'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1341:in `find_every'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1303:in `find_initial'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:534:in `find'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/session/active_record_store.rb:113:in `find_by_session_id'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/session/active_record_store.rb:288:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/base.rb:1263:in `silence'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/session/active_record_store.rb:288:in `initialize'
+    /usr/local/lib/ruby/1.8/cgi/session.rb:273:in `new'
+    /usr/local/lib/ruby/1.8/cgi/session.rb:273:in `initialize_without_cgi_reader'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/cgi_ext/session.rb:39:in `initialize_without_dynamic_session_expiration'
+    /Users/dinshaw/Sites/RAILS_EXEMPLAR/cb3/vendor/plugins/dynamic_session_exp/lib/dynamic_session_expiry.rb:34:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/cgi_process.rb:132:in `new'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/cgi_process.rb:132:in `session'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/cgi_process.rb:168:in `stale_session_check!'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/cgi_process.rb:116:in `session'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/base.rb:1135:in `assign_shortcuts_without_flash'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/flash.rb:166:in `assign_shortcuts'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/base.rb:523:in `process_without_filters'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/filters.rb:569:in `process_without_session_management_support'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/session_management.rb:130:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/base.rb:389:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:149:in `handle_request'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:76:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:74:in `synchronize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:74:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:159:in `process_client'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `each'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `process_client'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `new'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `new'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/configurator.rb:282:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/configurator.rb:281:in `each'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/configurator.rb:281:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/mongrel_rails:128:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/command.rb:212:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/mongrel_rails:281
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:502:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:502:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:502:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/rails-2.1.0/lib/commands/servers/mongrel.rb:64
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:509:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:509:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/rails-2.1.0/lib/commands/server.rb:39
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    script/server:3
+
+
+Processing PublicController#index (for 127.0.0.1 at 2008-08-15 15:30:02) [GET]
+  Session ID: b2e812698e13a03d4265f80a2248702e
+  Parameters: {"action"=>"index", "controller"=>"public"}
+Rendering template within layouts/main
+Rendering public/index
+Rendered shared/_tinymce (0.00013)
+Rendered users/_user_bar (0.00022)
+Completed in 0.00748 (133 reqs/sec) | Rendering: 0.00491 (65%) | DB: 0.01903 (254%) | 200 OK [http://127.0.0.1/]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 15:30:03) [GET]
+  Session ID: b2e812698e13a03d4265f80a2248702e
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+Rendering stylesheets/reset
+Completed in 0.00560 (178 reqs/sec) | Rendering: 0.00235 (41%) | DB: 0.00707 (126%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 15:30:03) [GET]
+  Session ID: b2e812698e13a03d4265f80a2248702e
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+Rendering stylesheets/layout
+Completed in 0.00402 (248 reqs/sec) | Rendering: 0.00137 (34%) | DB: 0.00147 (36%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:30:03) [GET]
+  Session ID: b2e812698e13a03d4265f80a2248702e
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+Rendering stylesheets/main
+Completed in 0.01231 (81 reqs/sec) | Rendering: 0.00940 (76%) | DB: 0.00203 (16%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 15:30:03) [GET]
+  Session ID: b2e812698e13a03d4265f80a2248702e
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+Rendering stylesheets/nav
+Completed in 0.00405 (246 reqs/sec) | Rendering: 0.00137 (33%) | DB: 0.00341 (84%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:30:03) [GET]
+  Session ID: b2e812698e13a03d4265f80a2248702e
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+Rendering stylesheets/errors
+Completed in 0.00426 (234 reqs/sec) | Rendering: 0.00151 (35%) | DB: 0.00157 (36%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2008-08-15 15:30:06) [GET]
+  Session ID: b2e812698e13a03d4265f80a2248702e
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering template within layouts/main
+Rendering sessions/new
+Rendered shared/_tinymce (0.00007)
+Rendered users/_user_bar (0.00020)
+Completed in 0.00549 (182 reqs/sec) | Rendering: 0.00291 (53%) | DB: 0.00093 (16%) | 200 OK [http://127.0.0.1/login]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 15:30:06) [GET]
+  Session ID: b2e812698e13a03d4265f80a2248702e
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+Rendering stylesheets/reset
+Completed in 0.00331 (301 reqs/sec) | Rendering: 0.00057 (17%) | DB: 0.00176 (52%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 15:30:06) [GET]
+  Session ID: b2e812698e13a03d4265f80a2248702e
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+Rendering stylesheets/layout
+Completed in 0.00367 (272 reqs/sec) | Rendering: 0.00041 (11%) | DB: 0.01199 (326%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:30:07) [GET]
+  Session ID: b2e812698e13a03d4265f80a2248702e
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+Rendering stylesheets/main
+Completed in 0.00329 (303 reqs/sec) | Rendering: 0.00055 (16%) | DB: 0.00170 (51%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 15:30:07) [GET]
+  Session ID: b2e812698e13a03d4265f80a2248702e
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+Rendering stylesheets/nav
+Completed in 0.00339 (294 reqs/sec) | Rendering: 0.00039 (11%) | DB: 0.00288 (84%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:30:07) [GET]
+  Session ID: b2e812698e13a03d4265f80a2248702e
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+Rendering stylesheets/errors
+Completed in 0.00331 (302 reqs/sec) | Rendering: 0.00039 (11%) | DB: 0.00340 (102%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2008-08-15 15:30:12) [POST]
+  Session ID: b2e812698e13a03d4265f80a2248702e
+  Parameters: {"commit"=>"Log in", "action"=>"create", "authenticity_token"=>"731b98c5a338825c06e4ecf3971397912ce8ba60", "controller"=>"sessions", "login"=>"admin", "password"=>"[FILTERED]"}
+Cookie set: auth_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT
+  [4;36;1mUser Load (0.001016)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`login` = 'admin') AND (users.state = 'active') LIMIT 1[0m
+Failed login for 'admin' from 127.0.0.1 at Fri Aug 15 19:30:12 UTC 2008
+Rendering template within layouts/main
+Rendering sessions/new
+Rendered shared/_tinymce (0.00007)
+Rendered users/_user_bar (0.00019)
+Completed in 0.00635 (157 reqs/sec) | Rendering: 0.00200 (31%) | DB: 0.00196 (30%) | 200 OK [http://127.0.0.1/session]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 15:30:12) [GET]
+  Session ID: b2e812698e13a03d4265f80a2248702e
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+Rendering stylesheets/reset
+Completed in 0.00328 (305 reqs/sec) | Rendering: 0.00058 (17%) | DB: 0.03786 (1155%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 15:30:12) [GET]
+  Session ID: b2e812698e13a03d4265f80a2248702e
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+Rendering stylesheets/layout
+Completed in 0.00320 (312 reqs/sec) | Rendering: 0.00039 (12%) | DB: 0.01196 (373%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:30:12) [GET]
+  Session ID: b2e812698e13a03d4265f80a2248702e
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+Rendering stylesheets/main
+Completed in 0.00332 (301 reqs/sec) | Rendering: 0.00060 (18%) | DB: 0.00278 (83%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 15:30:12) [GET]
+  Session ID: b2e812698e13a03d4265f80a2248702e
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+Rendering stylesheets/nav
+Completed in 0.00314 (318 reqs/sec) | Rendering: 0.00037 (11%) | DB: 0.00326 (104%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:30:12) [GET]
+  Session ID: b2e812698e13a03d4265f80a2248702e
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+Rendering stylesheets/errors
+Completed in 0.00321 (311 reqs/sec) | Rendering: 0.00038 (11%) | DB: 0.00156 (48%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000142)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.142962)[0m   [0mDROP DATABASE IF EXISTS `rails_dev`[0m
+  [4;36;1mSQL (0.000155)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.003327)[0m   [0mCREATE DATABASE `rails_dev` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_general_ci`[0m
+  [4;36;1mSQL (0.000161)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000471)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.002852)[0m   [0;1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.008094)[0m   [0mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [4;36;1mSQL (0.000694)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.000520)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000219)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.000224)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000203)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20080812041618)
+  [4;35;1mSQL (0.000200)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000435)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.003893)[0m   [0mCREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `login` varchar(40) DEFAULT NULL NULL, `name` varchar(100) DEFAULT '' NULL, `email` varchar(100) DEFAULT NULL NULL, `crypted_password` varchar(40) DEFAULT NULL NULL, `salt` varchar(40) DEFAULT NULL NULL, `remember_token` varchar(40) DEFAULT NULL NULL, `remember_token_expires_at` datetime DEFAULT NULL NULL, `activation_code` varchar(40) DEFAULT NULL NULL, `reset_code` varchar(40) DEFAULT NULL NULL, `activated_at` datetime DEFAULT NULL NULL, `state` varchar(255) DEFAULT 'passive' NULL, `deleted_at` datetime DEFAULT NULL NULL, `created_at` datetime DEFAULT NULL NULL, `updated_at` datetime DEFAULT NULL NULL, `creator_id` int(11) DEFAULT NULL NULL, `updater_id` int(11) DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.009422)[0m   [0;1mCREATE UNIQUE INDEX `index_users_on_login` ON `users` (`login`)[0m
+  [4;35;1mSQL (0.001132)[0m   [0mINSERT into users (login, email, crypted_password, salt, activated_at, state) values ('admin', 'admin@example.com', 'ad3ca7d2848dc04cccac856f3baee816019219f4', 'ccddfcbe6e0bb54c9ba988b74064c71721faf438',now(),'active');[0m
+  [4;36;1mSQL (0.001035)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20080812041618')[0m
+Migrating to CreateRoles (20080814231419)
+  [4;35;1mSQL (0.000312)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.004660)[0m   [0;1mCREATE TABLE `roles` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.002290)[0m   [0mCREATE TABLE `roles_users` (`role_id` int(11) DEFAULT NULL NULL, `user_id` int(11) DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.007375)[0m   [0;1mCREATE INDEX `index_roles_users_on_role_id` ON `roles_users` (`role_id`)[0m
+  [4;35;1mSQL (0.006722)[0m   [0mCREATE INDEX `index_roles_users_on_user_id` ON `roles_users` (`user_id`)[0m
+  [4;36;1mRole Columns (0.001917)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+  [4;35;1mSQL (0.000824)[0m   [0mBEGIN[0m
+  [4;36;1mRole Create (0.000271)[0m   [0;1mINSERT INTO `roles` (`name`) VALUES('superuser')[0m
+  [4;35;1mSQL (0.000824)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000151)[0m   [0;1mBEGIN[0m
+  [4;35;1mRole Create (0.000262)[0m   [0mINSERT INTO `roles` (`name`) VALUES('administrator')[0m
+  [4;36;1mSQL (0.000845)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.001025)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20080814231419')[0m
+Migrating to CreateSlugs (20080814233350)
+  [4;36;1mSQL (0.000489)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.003315)[0m   [0mCREATE TABLE `slugs` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) DEFAULT NULL NULL, `sluggable_type` varchar(255) DEFAULT NULL NULL, `sluggable_id` int(11) DEFAULT NULL NULL, `created_at` datetime DEFAULT NULL NULL, `updated_at` datetime DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.009988)[0m   [0;1mCREATE unique INDEX `index_slugs_on_name_and_sluggable_type` ON `slugs` (`name`, `sluggable_type`)[0m
+  [4;35;1mSQL (0.009031)[0m   [0mCREATE INDEX `index_slugs_on_sluggable_id` ON `slugs` (`sluggable_id`)[0m
+  [4;36;1mSQL (0.000905)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20080814233350')[0m
+Migrating to CreateSessions (20080815004538)
+  [4;35;1mSQL (0.000380)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.003098)[0m   [0;1mCREATE TABLE `sessions` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `session_id` varchar(255) NOT NULL, `data` text DEFAULT NULL NULL, `created_at` datetime DEFAULT NULL NULL, `updated_at` datetime DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.006777)[0m   [0mCREATE INDEX `index_sessions_on_session_id` ON `sessions` (`session_id`)[0m
+  [4;36;1mSQL (0.006834)[0m   [0;1mCREATE INDEX `index_sessions_on_updated_at` ON `sessions` (`updated_at`)[0m
+  [4;35;1mSQL (0.001048)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20080815004538')[0m
+  [4;36;1mSQL (0.000413)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.000521)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.001771)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+  [4;35;1mSQL (0.002636)[0m   [0mdescribe `roles`[0m
+  [4;36;1mSQL (0.001945)[0m   [0;1mSHOW KEYS FROM `roles`[0m
+  [4;35;1mSQL (0.001746)[0m   [0mSHOW FIELDS FROM `roles_users`[0m
+  [4;36;1mSQL (0.003471)[0m   [0;1mdescribe `roles_users`[0m
+  [4;35;1mSQL (0.002653)[0m   [0mSHOW KEYS FROM `roles_users`[0m
+  [4;36;1mSQL (0.003097)[0m   [0;1mSHOW FIELDS FROM `sessions`[0m
+  [4;35;1mSQL (0.002738)[0m   [0mdescribe `sessions`[0m
+  [4;36;1mSQL (0.001646)[0m   [0;1mSHOW KEYS FROM `sessions`[0m
+  [4;35;1mSQL (0.003151)[0m   [0mSHOW FIELDS FROM `slugs`[0m
+  [4;36;1mSQL (0.002998)[0m   [0;1mdescribe `slugs`[0m
+  [4;35;1mSQL (0.001540)[0m   [0mSHOW KEYS FROM `slugs`[0m
+  [4;36;1mSQL (0.003792)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mSQL (0.004941)[0m   [0mdescribe `users`[0m
+  [4;36;1mSQL (0.003178)[0m   [0;1mSHOW KEYS FROM `users`[0m
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2008-08-15 15:31:07) [POST]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"commit"=>"Log in", "action"=>"create", "authenticity_token"=>"731b98c5a338825c06e4ecf3971397912ce8ba60", "controller"=>"sessions", "login"=>"admin", "password"=>"[FILTERED]"}
+
+
+ActionController::InvalidAuthenticityToken (ActionController::InvalidAuthenticityToken):
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/request_forgery_protection.rb:86:in `verify_authenticity_token'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/callbacks.rb:173:in `send'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/callbacks.rb:173:in `evaluate_method'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/callbacks.rb:161:in `call'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/filters.rb:430:in `call'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/filters.rb:592:in `run_before_filters'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/filters.rb:578:in `call_filters'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/filters.rb:573:in `perform_action_without_benchmark'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/local/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/rescue.rb:201:in `perform_action_without_caching'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/caching/sql_cache.rb:13:in `perform_action'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/abstract/query_cache.rb:33:in `cache'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/query_cache.rb:8:in `cache'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/caching/sql_cache.rb:12:in `perform_action'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/base.rb:529:in `send'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/base.rb:529:in `process_without_filters'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/filters.rb:569:in `process_without_session_management_support'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/session_management.rb:130:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/base.rb:389:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:149:in `handle_request'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:76:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:74:in `synchronize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:74:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:159:in `process_client'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `each'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `process_client'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `new'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `new'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/configurator.rb:282:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/configurator.rb:281:in `each'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/configurator.rb:281:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/mongrel_rails:128:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/command.rb:212:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/mongrel_rails:281
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:502:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:502:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:502:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/rails-2.1.0/lib/commands/servers/mongrel.rb:64
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:509:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:509:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/rails-2.1.0/lib/commands/server.rb:39
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    script/server:3
+
+Rendering /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/templates/rescues/layout.erb (unprocessable_entity)
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2008-08-15 15:31:10) [POST]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"commit"=>"Log in", "action"=>"create", "authenticity_token"=>"731b98c5a338825c06e4ecf3971397912ce8ba60", "controller"=>"sessions", "login"=>"admin", "password"=>"[FILTERED]"}
+
+
+ActionController::InvalidAuthenticityToken (ActionController::InvalidAuthenticityToken):
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/request_forgery_protection.rb:86:in `verify_authenticity_token'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/callbacks.rb:173:in `send'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/callbacks.rb:173:in `evaluate_method'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/callbacks.rb:161:in `call'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/filters.rb:430:in `call'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/filters.rb:592:in `run_before_filters'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/filters.rb:578:in `call_filters'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/filters.rb:573:in `perform_action_without_benchmark'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/local/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/rescue.rb:201:in `perform_action_without_caching'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/caching/sql_cache.rb:13:in `perform_action'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/connection_adapters/abstract/query_cache.rb:33:in `cache'
+    /usr/local/lib/ruby/gems/1.8/gems/activerecord-2.1.0/lib/active_record/query_cache.rb:8:in `cache'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/caching/sql_cache.rb:12:in `perform_action'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/base.rb:529:in `send'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/base.rb:529:in `process_without_filters'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/filters.rb:569:in `process_without_session_management_support'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/session_management.rb:130:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/base.rb:389:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:149:in `handle_request'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:76:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:74:in `synchronize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/../lib/mongrel/rails.rb:74:in `process'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:159:in `process_client'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `each'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:158:in `process_client'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `new'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:285:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `initialize'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `new'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel.rb:268:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/configurator.rb:282:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/configurator.rb:281:in `each'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/configurator.rb:281:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/mongrel_rails:128:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/lib/mongrel/command.rb:212:in `run'
+    /usr/local/lib/ruby/gems/1.8/gems/mongrel-1.1.5/bin/mongrel_rails:281
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:502:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:502:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:502:in `load'
+    /usr/local/lib/ruby/gems/1.8/gems/rails-2.1.0/lib/commands/servers/mongrel.rb:64
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:509:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:354:in `new_constants_in'
+    /usr/local/lib/ruby/gems/1.8/gems/activesupport-2.1.0/lib/active_support/dependencies.rb:509:in `require'
+    /usr/local/lib/ruby/gems/1.8/gems/rails-2.1.0/lib/commands/server.rb:39
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    /usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    script/server:3
+
+Rendering /usr/local/lib/ruby/gems/1.8/gems/actionpack-2.1.0/lib/action_controller/templates/rescues/layout.erb (unprocessable_entity)
+
+
+Processing PublicController#index (for 127.0.0.1 at 2008-08-15 15:31:12) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"action"=>"index", "controller"=>"public"}
+Rendering template within layouts/main
+Rendering public/index
+Rendered shared/_tinymce (0.00007)
+Rendered users/_user_bar (0.00019)
+Completed in 0.00392 (254 reqs/sec) | Rendering: 0.00146 (37%) | DB: 0.01348 (343%) | 200 OK [http://127.0.0.1/]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 15:31:12) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+Rendering stylesheets/reset
+Completed in 0.00409 (244 reqs/sec) | Rendering: 0.00060 (14%) | DB: 0.00197 (48%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 15:31:12) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+Rendering stylesheets/layout
+Completed in 0.00315 (317 reqs/sec) | Rendering: 0.00038 (12%) | DB: 0.00882 (279%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:31:12) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+Rendering stylesheets/main
+Completed in 0.00405 (246 reqs/sec) | Rendering: 0.00059 (14%) | DB: 0.00144 (35%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 15:31:13) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+Rendering stylesheets/nav
+Completed in 0.00355 (281 reqs/sec) | Rendering: 0.00038 (10%) | DB: 0.00109 (30%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:31:13) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+Rendering stylesheets/errors
+Completed in 0.00311 (321 reqs/sec) | Rendering: 0.00037 (11%) | DB: 0.00157 (50%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2008-08-15 15:31:14) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering template within layouts/main
+Rendering sessions/new
+Rendered shared/_tinymce (0.00007)
+Rendered users/_user_bar (0.00021)
+Completed in 0.00481 (207 reqs/sec) | Rendering: 0.00211 (43%) | DB: 0.00097 (20%) | 200 OK [http://127.0.0.1/login]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 15:31:14) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+Rendering stylesheets/reset
+Completed in 0.00346 (288 reqs/sec) | Rendering: 0.00068 (19%) | DB: 0.00183 (52%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 15:31:14) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+Rendering stylesheets/layout
+Completed in 0.00318 (314 reqs/sec) | Rendering: 0.00045 (14%) | DB: 0.01675 (526%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:31:14) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+Rendering stylesheets/main
+Completed in 0.00326 (306 reqs/sec) | Rendering: 0.00056 (17%) | DB: 0.00244 (74%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 15:31:14) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+Rendering stylesheets/nav
+Completed in 0.00337 (296 reqs/sec) | Rendering: 0.00038 (11%) | DB: 0.00181 (53%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:31:14) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+Rendering stylesheets/errors
+Completed in 0.00340 (294 reqs/sec) | Rendering: 0.00038 (11%) | DB: 0.00170 (50%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2008-08-15 15:31:18) [POST]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"commit"=>"Log in", "action"=>"create", "authenticity_token"=>"676fa55c8000dd53c148f719860d57d855a18bca", "controller"=>"sessions", "login"=>"admin", "password"=>"[FILTERED]"}
+Cookie set: auth_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT
+  [4;35;1mUser Load (0.001146)[0m   [0mSELECT * FROM `users` WHERE (`users`.`login` = 'admin') AND (users.state = 'active') LIMIT 1[0m
+  [4;36;1mUser Columns (0.013082)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+Failed login for 'admin' from 127.0.0.1 at Fri Aug 15 19:31:18 UTC 2008
+Rendering template within layouts/main
+Rendering sessions/new
+Rendered shared/_tinymce (0.00009)
+Rendered users/_user_bar (0.00017)
+Completed in 0.02425 (41 reqs/sec) | Rendering: 0.00248 (10%) | DB: 0.01519 (62%) | 200 OK [http://127.0.0.1/session]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 15:31:18) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+Rendering stylesheets/reset
+Completed in 0.00337 (296 reqs/sec) | Rendering: 0.00057 (16%) | DB: 0.00301 (89%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 15:31:18) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+Rendering stylesheets/layout
+Completed in 0.00315 (317 reqs/sec) | Rendering: 0.00040 (12%) | DB: 0.01094 (347%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:31:18) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+Rendering stylesheets/main
+Completed in 0.00363 (275 reqs/sec) | Rendering: 0.00060 (16%) | DB: 0.00372 (102%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 15:31:18) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+Rendering stylesheets/nav
+Completed in 0.00348 (287 reqs/sec) | Rendering: 0.00039 (11%) | DB: 0.00178 (51%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:31:18) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+Rendering stylesheets/errors
+Completed in 0.00307 (325 reqs/sec) | Rendering: 0.00036 (11%) | DB: 0.00095 (31%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2008-08-15 15:31:22) [POST]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"commit"=>"Log in", "action"=>"create", "authenticity_token"=>"676fa55c8000dd53c148f719860d57d855a18bca", "controller"=>"sessions", "login"=>"admin", "password"=>"[FILTERED]"}
+Cookie set: auth_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT
+  [4;35;1mUser Load (0.001135)[0m   [0mSELECT * FROM `users` WHERE (`users`.`login` = 'admin') AND (users.state = 'active') LIMIT 1[0m
+  [4;36;1mUser Columns (0.013007)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mSQL (0.000173)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000136)[0m   [0;1mCOMMIT[0m
+Cookie set: auth_token=; path=/
+Redirected to http://127.0.0.1:3000/
+Completed in 0.02315 (43 reqs/sec) | DB: 0.01545 (66%) | 302 Found [http://127.0.0.1/session]
+
+
+Processing PublicController#index (for 127.0.0.1 at 2008-08-15 15:31:22) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"action"=>"index", "controller"=>"public"}
+  [4;35;1mUser Columns (0.003993)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.001334)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering template within layouts/main
+Rendering public/index
+Rendered shared/_tinymce (0.00008)
+Rendered users/_user_bar (0.00304)
+Completed in 0.01524 (65 reqs/sec) | Rendering: 0.00470 (30%) | DB: 0.00747 (49%) | 200 OK [http://127.0.0.1/]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 15:31:22) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+  [4;35;1mUser Columns (0.012502)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.001167)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering stylesheets/reset
+Completed in 0.01835 (54 reqs/sec) | Rendering: 0.00039 (2%) | DB: 0.01722 (93%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 15:31:22) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+  [4;35;1mUser Columns (0.003940)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.001283)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering stylesheets/layout
+Completed in 0.01087 (91 reqs/sec) | Rendering: 0.00044 (4%) | DB: 0.00940 (86%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:31:23) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+  [4;35;1mUser Columns (0.003937)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.001800)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering stylesheets/main
+Completed in 0.01193 (83 reqs/sec) | Rendering: 0.00066 (5%) | DB: 0.00791 (66%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 15:31:23) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+  [4;35;1mUser Columns (0.004296)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.001305)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering stylesheets/nav
+Completed in 0.01141 (87 reqs/sec) | Rendering: 0.00046 (4%) | DB: 0.00850 (74%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:31:23) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+  [4;35;1mUser Columns (0.003229)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.001122)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering stylesheets/errors
+Completed in 0.00948 (105 reqs/sec) | Rendering: 0.00039 (4%) | DB: 0.00918 (96%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+
+
+Processing AdminController#index (for 127.0.0.1 at 2008-08-15 15:31:28) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"action"=>"index", "controller"=>"admin"}
+  [4;35;1mUser Columns (0.013009)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.001323)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mJoin Table Columns (0.002294)[0m   [0mSHOW FIELDS FROM `roles_users`[0m
+  [4;36;1mRole Load (0.000698)[0m   [0;1mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;35;1mUser Load (0.001991)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+Sent mail to admin@example.com
+
+Date: Fri, 15 Aug 2008 15:31:28 -0400
+From: ADMINEMAIL
+To: admin@example.com
+Subject: [YOURSITE] Unauthorized Access Attempt
+Mime-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Unauthorized Access attempt by: , 1 :
+
+/admin
+
+Redirected to http://127.0.0.1:3000/
+Filter chain halted as [:check_roles] rendered_or_redirected.
+Completed in 0.14267 (7 reqs/sec) | DB: 0.02212 (15%) | 302 Found [http://127.0.0.1/admin]
+
+
+Processing PublicController#index (for 127.0.0.1 at 2008-08-15 15:31:29) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"action"=>"index", "controller"=>"public"}
+  [4;36;1mUser Columns (0.003873)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.001277)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering template within layouts/main
+Rendering public/index
+Rendered shared/_tinymce (0.00009)
+Rendered users/_user_bar (0.00333)
+Completed in 0.01519 (65 reqs/sec) | Rendering: 0.00513 (33%) | DB: 0.01674 (110%) | 200 OK [http://127.0.0.1/]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 15:31:29) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+  [4;36;1mUser Columns (0.008899)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.002351)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering stylesheets/reset
+Completed in 0.01712 (58 reqs/sec) | Rendering: 0.00047 (2%) | DB: 0.03711 (216%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 15:31:29) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+  [4;36;1mUser Columns (0.004061)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.002247)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering stylesheets/layout
+Completed in 0.01234 (81 reqs/sec) | Rendering: 0.00046 (3%) | DB: 0.00908 (73%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:31:29) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+  [4;36;1mUser Columns (0.004169)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.001329)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering stylesheets/main
+Completed in 0.01167 (85 reqs/sec) | Rendering: 0.00066 (5%) | DB: 0.00815 (69%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 15:31:29) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+  [4;36;1mUser Columns (0.003888)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.001042)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering stylesheets/nav
+Completed in 0.00957 (104 reqs/sec) | Rendering: 0.00036 (3%) | DB: 0.00784 (81%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:31:29) [GET]
+  Session ID: a7c56005ac6616b8ebc64c9fc9ebe8f0
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+  [4;36;1mUser Columns (0.003267)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.001074)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering stylesheets/errors
+Completed in 0.00906 (110 reqs/sec) | Rendering: 0.00038 (4%) | DB: 0.00697 (77%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000144)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.047442)[0m   [0mDROP DATABASE IF EXISTS `rails_dev`[0m
+  [4;36;1mSQL (0.000143)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000500)[0m   [0mCREATE DATABASE `rails_dev` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_general_ci`[0m
+  [4;36;1mSQL (0.000102)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000423)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.003061)[0m   [0;1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.008676)[0m   [0mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [4;36;1mSQL (0.000685)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.000548)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000255)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.000246)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000242)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20080812041618)
+  [4;35;1mSQL (0.000246)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000494)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.004285)[0m   [0mCREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `login` varchar(40) DEFAULT NULL NULL, `name` varchar(100) DEFAULT '' NULL, `email` varchar(100) DEFAULT NULL NULL, `crypted_password` varchar(40) DEFAULT NULL NULL, `salt` varchar(40) DEFAULT NULL NULL, `remember_token` varchar(40) DEFAULT NULL NULL, `remember_token_expires_at` datetime DEFAULT NULL NULL, `activation_code` varchar(40) DEFAULT NULL NULL, `reset_code` varchar(40) DEFAULT NULL NULL, `activated_at` datetime DEFAULT NULL NULL, `state` varchar(255) DEFAULT 'passive' NULL, `deleted_at` datetime DEFAULT NULL NULL, `created_at` datetime DEFAULT NULL NULL, `updated_at` datetime DEFAULT NULL NULL, `creator_id` int(11) DEFAULT NULL NULL, `updater_id` int(11) DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.009718)[0m   [0;1mCREATE UNIQUE INDEX `index_users_on_login` ON `users` (`login`)[0m
+  [4;35;1mSQL (0.001246)[0m   [0mINSERT into users (login, email, crypted_password, salt, activated_at, state) values ('admin', 'admin@example.com', 'ad3ca7d2848dc04cccac856f3baee816019219f4', 'ccddfcbe6e0bb54c9ba988b74064c71721faf438',now(),'active');[0m
+  [4;36;1mSQL (0.001820)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20080812041618')[0m
+Migrating to CreateRoles (20080814231419)
+  [4;35;1mSQL (0.000442)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.002883)[0m   [0;1mCREATE TABLE `roles` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.003306)[0m   [0mCREATE TABLE `roles_users` (`role_id` int(11) DEFAULT NULL NULL, `user_id` int(11) DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.008726)[0m   [0;1mCREATE INDEX `index_roles_users_on_role_id` ON `roles_users` (`role_id`)[0m
+  [4;35;1mSQL (0.012801)[0m   [0mCREATE INDEX `index_roles_users_on_user_id` ON `roles_users` (`user_id`)[0m
+  [4;36;1mRole Columns (0.002895)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+  [4;35;1mSQL (0.001380)[0m   [0mBEGIN[0m
+  [4;36;1mRole Create (0.000266)[0m   [0;1mINSERT INTO `roles` (`name`) VALUES('administrator')[0m
+  [4;35;1mSQL (0.000733)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.000091)[0m   [0;1mBEGIN[0m
+  [4;35;1mRole Create (0.000191)[0m   [0mINSERT INTO `roles` (`name`) VALUES('superuser')[0m
+  [4;36;1mSQL (0.000751)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.000974)[0m   [0mINSERT into roles_users (role_id, user_id) VALUES ('1','1')[0m
+  [4;36;1mSQL (0.001008)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20080814231419')[0m
+Migrating to CreateSlugs (20080814233350)
+  [4;35;1mSQL (0.000486)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.002800)[0m   [0;1mCREATE TABLE `slugs` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) DEFAULT NULL NULL, `sluggable_type` varchar(255) DEFAULT NULL NULL, `sluggable_id` int(11) DEFAULT NULL NULL, `created_at` datetime DEFAULT NULL NULL, `updated_at` datetime DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.009399)[0m   [0mCREATE unique INDEX `index_slugs_on_name_and_sluggable_type` ON `slugs` (`name`, `sluggable_type`)[0m
+  [4;36;1mSQL (0.009917)[0m   [0;1mCREATE INDEX `index_slugs_on_sluggable_id` ON `slugs` (`sluggable_id`)[0m
+  [4;35;1mSQL (0.000943)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20080814233350')[0m
+Migrating to CreateSessions (20080815004538)
+  [4;36;1mSQL (0.000456)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.002669)[0m   [0mCREATE TABLE `sessions` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `session_id` varchar(255) NOT NULL, `data` text DEFAULT NULL NULL, `created_at` datetime DEFAULT NULL NULL, `updated_at` datetime DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.007679)[0m   [0;1mCREATE INDEX `index_sessions_on_session_id` ON `sessions` (`session_id`)[0m
+  [4;35;1mSQL (0.007607)[0m   [0mCREATE INDEX `index_sessions_on_updated_at` ON `sessions` (`updated_at`)[0m
+  [4;36;1mSQL (0.001738)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20080815004538')[0m
+  [4;35;1mSQL (0.000541)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000608)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.001874)[0m   [0mSHOW FIELDS FROM `roles`[0m
+  [4;36;1mSQL (0.003149)[0m   [0;1mdescribe `roles`[0m
+  [4;35;1mSQL (0.001470)[0m   [0mSHOW KEYS FROM `roles`[0m
+  [4;36;1mSQL (0.002222)[0m   [0;1mSHOW FIELDS FROM `roles_users`[0m
+  [4;35;1mSQL (0.003708)[0m   [0mdescribe `roles_users`[0m
+  [4;36;1mSQL (0.001776)[0m   [0;1mSHOW KEYS FROM `roles_users`[0m
+  [4;35;1mSQL (0.002882)[0m   [0mSHOW FIELDS FROM `sessions`[0m
+  [4;36;1mSQL (0.003291)[0m   [0;1mdescribe `sessions`[0m
+  [4;35;1mSQL (0.001516)[0m   [0mSHOW KEYS FROM `sessions`[0m
+  [4;36;1mSQL (0.004995)[0m   [0;1mSHOW FIELDS FROM `slugs`[0m
+  [4;35;1mSQL (0.003789)[0m   [0mdescribe `slugs`[0m
+  [4;36;1mSQL (0.002356)[0m   [0;1mSHOW KEYS FROM `slugs`[0m
+  [4;35;1mSQL (0.003186)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mSQL (0.004700)[0m   [0;1mdescribe `users`[0m
+  [4;35;1mSQL (0.002860)[0m   [0mSHOW KEYS FROM `users`[0m
+
+
+Processing PublicController#index (for 127.0.0.1 at 2008-08-15 15:33:23) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"action"=>"index", "controller"=>"public"}
+  [4;36;1mUser Columns (0.013047)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.001255)[0m   [0mSELECT * FROM `users` WHERE (`users`.`remember_token` = '') LIMIT 1[0m
+Rendering template within layouts/main
+Rendering public/index
+Rendered shared/_tinymce (0.00008)
+  [4;36;1mCACHE (0.000000)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`remember_token` = '') LIMIT 1[0m
+Rendered users/_user_bar (0.00066)
+Completed in 0.02174 (45 reqs/sec) | Rendering: 0.00230 (10%) | DB: 0.01710 (78%) | 200 OK [http://127.0.0.1/]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 15:33:24) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+  [4;35;1mUser Columns (0.011491)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.002701)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`remember_token` = '') LIMIT 1[0m
+Rendering stylesheets/reset
+Completed in 0.01986 (50 reqs/sec) | Rendering: 0.00046 (2%) | DB: 0.01732 (87%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 15:33:24) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+  [4;35;1mUser Columns (0.004738)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.001165)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`remember_token` = '') LIMIT 1[0m
+Rendering stylesheets/layout
+Completed in 0.08542 (11 reqs/sec) | Rendering: 0.00039 (0%) | DB: 0.00782 (9%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:33:24) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+  [4;35;1mUser Columns (0.004213)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.001213)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`remember_token` = '') LIMIT 1[0m
+Rendering stylesheets/main
+Completed in 0.01171 (85 reqs/sec) | Rendering: 0.00084 (7%) | DB: 0.00745 (63%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 15:33:24) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+  [4;35;1mUser Columns (0.003951)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.001315)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`remember_token` = '') LIMIT 1[0m
+Rendering stylesheets/nav
+Completed in 0.01102 (90 reqs/sec) | Rendering: 0.00044 (4%) | DB: 0.00763 (69%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:33:24) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+  [4;35;1mUser Columns (0.003262)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.001094)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`remember_token` = '') LIMIT 1[0m
+Rendering stylesheets/errors
+Completed in 0.00968 (103 reqs/sec) | Rendering: 0.00041 (4%) | DB: 0.00725 (74%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2008-08-15 15:33:26) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+  [4;35;1mUser Columns (0.013007)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.001247)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`remember_token` = '') LIMIT 1[0m
+Rendering template within layouts/main
+Rendering sessions/new
+Rendered shared/_tinymce (0.00009)
+  [4;35;1mCACHE (0.000000)[0m   [0mSELECT * FROM `users` WHERE (`users`.`remember_token` = '') LIMIT 1[0m
+Rendered users/_user_bar (0.00066)
+Completed in 0.02241 (44 reqs/sec) | Rendering: 0.00329 (14%) | DB: 0.01523 (67%) | 200 OK [http://127.0.0.1/login]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 15:33:26) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+  [4;36;1mUser Columns (0.009489)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.003302)[0m   [0mSELECT * FROM `users` WHERE (`users`.`remember_token` = '') LIMIT 1[0m
+Rendering stylesheets/reset
+Completed in 0.01953 (51 reqs/sec) | Rendering: 0.00045 (2%) | DB: 0.01482 (75%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 15:33:27) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+  [4;36;1mUser Columns (0.003042)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.001048)[0m   [0mSELECT * FROM `users` WHERE (`users`.`remember_token` = '') LIMIT 1[0m
+Rendering stylesheets/layout
+Completed in 0.00859 (116 reqs/sec) | Rendering: 0.00038 (4%) | DB: 0.00512 (59%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:33:27) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+  [4;36;1mUser Columns (0.003190)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.001038)[0m   [0mSELECT * FROM `users` WHERE (`users`.`remember_token` = '') LIMIT 1[0m
+Rendering stylesheets/main
+Completed in 0.00905 (110 reqs/sec) | Rendering: 0.00057 (6%) | DB: 0.00582 (64%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 15:33:27) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+  [4;36;1mUser Columns (0.004017)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.001274)[0m   [0mSELECT * FROM `users` WHERE (`users`.`remember_token` = '') LIMIT 1[0m
+Rendering stylesheets/nav
+Completed in 0.01164 (85 reqs/sec) | Rendering: 0.00047 (4%) | DB: 0.00693 (59%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:33:27) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+  [4;36;1mUser Columns (0.003865)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.001216)[0m   [0mSELECT * FROM `users` WHERE (`users`.`remember_token` = '') LIMIT 1[0m
+Rendering stylesheets/errors
+Completed in 0.01108 (90 reqs/sec) | Rendering: 0.00048 (4%) | DB: 0.00659 (59%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2008-08-15 15:33:35) [POST]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"commit"=>"Log in", "action"=>"create", "authenticity_token"=>"d279d0d5a5e84bdcd96a61de19826dba987e5657", "controller"=>"sessions", "login"=>"admin", "password"=>"[FILTERED]"}
+  [4;36;1mUser Columns (0.013129)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.001253)[0m   [0mSELECT * FROM `users` WHERE (`users`.`remember_token` = '') LIMIT 1[0m
+Cookie set: auth_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT
+  [4;36;1mUser Load (0.001365)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`login` = 'admin') AND (users.state = 'active') LIMIT 1[0m
+  [4;35;1mSQL (0.000153)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000135)[0m   [0;1mCOMMIT[0m
+Cookie set: auth_token=; path=/
+Redirected to http://127.0.0.1:3000/
+Completed in 0.02607 (38 reqs/sec) | DB: 0.01704 (65%) | 302 Found [http://127.0.0.1/session]
+
+
+Processing PublicController#index (for 127.0.0.1 at 2008-08-15 15:33:36) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"action"=>"index", "controller"=>"public"}
+  [4;35;1mUser Columns (0.002806)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.001060)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering template within layouts/main
+Rendering public/index
+Rendered shared/_tinymce (0.00007)
+Rendered users/_user_bar (0.00243)
+Completed in 0.01165 (85 reqs/sec) | Rendering: 0.00376 (32%) | DB: 0.00590 (50%) | 200 OK [http://127.0.0.1/]
+
+
+Processing StylesheetsController#reset (for 127.0.0.1 at 2008-08-15 15:33:36) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"format"=>"css", "action"=>"reset", "controller"=>"stylesheets"}
+  [4;35;1mUser Columns (0.012189)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.001099)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering stylesheets/reset
+Completed in 0.01855 (53 reqs/sec) | Rendering: 0.00042 (2%) | DB: 0.01615 (87%) | 200 OK [http://127.0.0.1/stylesheets/reset.css]
+
+
+Processing StylesheetsController#layout (for 127.0.0.1 at 2008-08-15 15:33:36) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"format"=>"css", "action"=>"layout", "controller"=>"stylesheets"}
+  [4;35;1mUser Columns (0.003429)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.001147)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering stylesheets/layout
+Completed in 0.00979 (102 reqs/sec) | Rendering: 0.00040 (4%) | DB: 0.00847 (86%) | 200 OK [http://127.0.0.1/stylesheets/layout.css]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:33:36) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+  [4;35;1mUser Columns (0.004006)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.001327)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering stylesheets/main
+Completed in 0.01319 (75 reqs/sec) | Rendering: 0.00110 (8%) | DB: 0.00977 (74%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#nav (for 127.0.0.1 at 2008-08-15 15:33:36) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"format"=>"css", "action"=>"nav", "controller"=>"stylesheets"}
+  [4;35;1mUser Columns (0.004860)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.003156)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering stylesheets/nav
+Completed in 0.01400 (71 reqs/sec) | Rendering: 0.00046 (3%) | DB: 0.01089 (77%) | 200 OK [http://127.0.0.1/stylesheets/nav.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:33:36) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+  [4;35;1mUser Columns (0.013227)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.001378)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering stylesheets/errors
+Completed in 0.02074 (48 reqs/sec) | Rendering: 0.00049 (2%) | DB: 0.01753 (84%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+
+
+Processing AdminController#index (for 127.0.0.1 at 2008-08-15 15:33:53) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"action"=>"index", "controller"=>"admin"}
+  [4;35;1mUser Columns (0.013060)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.001408)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mJoin Table Columns (0.002349)[0m   [0mSHOW FIELDS FROM `roles_users`[0m
+  [4;36;1mRole Load (0.000835)[0m   [0;1mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;35;1mRole Columns (0.002611)[0m   [0mSHOW FIELDS FROM `roles`[0m
+Rendering template within layouts/admin
+Rendering admin/index
+Rendered shared/_tinymce (0.00009)
+Completed in 0.03688 (27 reqs/sec) | Rendering: 0.00463 (12%) | DB: 0.02334 (63%) | 200 OK [http://127.0.0.1/admin]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:33:53) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+  [4;36;1mUser Columns (0.004119)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.001395)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering stylesheets/main
+Completed in 0.01196 (83 reqs/sec) | Rendering: 0.00084 (6%) | DB: 0.08638 (722%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#admin (for 127.0.0.1 at 2008-08-15 15:33:53) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"format"=>"css", "action"=>"admin", "controller"=>"stylesheets"}
+  [4;36;1mUser Columns (0.003955)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.001285)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering stylesheets/admin
+Completed in 0.01339 (74 reqs/sec) | Rendering: 0.00247 (18%) | DB: 0.00927 (69%) | 200 OK [http://127.0.0.1/stylesheets/admin.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:33:54) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+  [4;36;1mUser Columns (0.003932)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.001302)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering stylesheets/errors
+Completed in 0.01093 (91 reqs/sec) | Rendering: 0.00044 (4%) | DB: 0.00725 (66%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+
+
+Processing RolesController#index (for 127.0.0.1 at 2008-08-15 15:33:57) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"action"=>"index", "controller"=>"admin/roles"}
+  [4;36;1mUser Columns (0.013067)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.001351)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mJoin Table Columns (0.002606)[0m   [0;1mSHOW FIELDS FROM `roles_users`[0m
+  [4;35;1mRole Load (0.000840)[0m   [0mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;36;1mRole Columns (0.002456)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+  [4;35;1mRole Load (0.000463)[0m   [0mSELECT * FROM `roles` [0m
+Rendering template within layouts/admin
+Rendering admin/roles/index
+Rendered shared/_tinymce (0.00013)
+Completed in 0.03806 (26 reqs/sec) | Rendering: 0.00357 (9%) | DB: 0.02296 (60%) | 200 OK [http://127.0.0.1/admin/roles]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:33:57) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+  [4;36;1mUser Columns (0.003867)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.001275)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering stylesheets/main
+Completed in 0.01103 (90 reqs/sec) | Rendering: 0.00065 (5%) | DB: 0.00793 (71%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#admin (for 127.0.0.1 at 2008-08-15 15:33:57) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"format"=>"css", "action"=>"admin", "controller"=>"stylesheets"}
+  [4;36;1mUser Columns (0.004023)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.001416)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering stylesheets/admin
+Completed in 0.01224 (81 reqs/sec) | Rendering: 0.00048 (3%) | DB: 0.00888 (72%) | 200 OK [http://127.0.0.1/stylesheets/admin.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:33:57) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+  [4;36;1mUser Columns (0.004441)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.001329)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering stylesheets/errors
+Completed in 0.01248 (80 reqs/sec) | Rendering: 0.00049 (3%) | DB: 0.03603 (288%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+
+
+Processing RolesController#edit (for 127.0.0.1 at 2008-08-15 15:34:03) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"action"=>"edit", "id"=>"1", "controller"=>"admin/roles"}
+  [4;36;1mUser Columns (0.013061)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.001320)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mJoin Table Columns (0.002386)[0m   [0;1mSHOW FIELDS FROM `roles_users`[0m
+  [4;35;1mRole Load (0.000829)[0m   [0mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;36;1mRole Columns (0.002505)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+  [4;35;1mRole Load (0.000483)[0m   [0mSELECT * FROM `roles` WHERE (`roles`.`id` = 1) [0m
+Rendering template within layouts/admin
+Rendering admin/roles/edit
+Rendered shared/_tinymce (0.00008)
+Completed in 0.03587 (27 reqs/sec) | Rendering: 0.00327 (9%) | DB: 0.02262 (63%) | 200 OK [http://127.0.0.1/admin/roles/1/edit]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:34:04) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+  [4;36;1mUser Columns (0.003913)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.001290)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering stylesheets/main
+Completed in 0.01172 (85 reqs/sec) | Rendering: 0.00067 (5%) | DB: 0.00822 (70%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#admin (for 127.0.0.1 at 2008-08-15 15:34:04) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"format"=>"css", "action"=>"admin", "controller"=>"stylesheets"}
+  [4;36;1mUser Columns (0.002368)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.002395)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering stylesheets/admin
+Completed in 0.01044 (95 reqs/sec) | Rendering: 0.00046 (4%) | DB: 0.00898 (85%) | 200 OK [http://127.0.0.1/stylesheets/admin.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:34:04) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+  [4;36;1mUser Columns (0.004000)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.001455)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering stylesheets/errors
+Completed in 0.01151 (86 reqs/sec) | Rendering: 0.00046 (3%) | DB: 0.00827 (71%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+
+
+Processing RolesController#update (for 127.0.0.1 at 2008-08-15 15:34:06) [PUT]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"commit"=>"Update", "action"=>"update", "_method"=>"put", "authenticity_token"=>"d279d0d5a5e84bdcd96a61de19826dba987e5657", "role"=>{"name"=>"administrator"}, "id"=>"1", "controller"=>"admin/roles"}
+  [4;36;1mUser Columns (0.013678)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.001442)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mJoin Table Columns (0.002320)[0m   [0;1mSHOW FIELDS FROM `roles_users`[0m
+  [4;35;1mRole Load (0.000702)[0m   [0mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;36;1mRole Columns (0.002641)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+  [4;35;1mRole Load (0.000520)[0m   [0mSELECT * FROM `roles` WHERE (`roles`.`id` = 1) [0m
+  [4;36;1mSQL (0.000162)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.000156)[0m   [0mCOMMIT[0m
+Redirected to http://127.0.0.1:3000/admin/roles
+Completed in 0.03611 (27 reqs/sec) | DB: 0.02381 (65%) | 302 Found [http://127.0.0.1/admin/roles/1]
+
+
+Processing RolesController#index (for 127.0.0.1 at 2008-08-15 15:34:06) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"action"=>"index", "controller"=>"admin/roles"}
+  [4;36;1mUser Columns (0.004522)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.001317)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mJoin Table Columns (0.003199)[0m   [0;1mSHOW FIELDS FROM `roles_users`[0m
+  [4;35;1mRole Load (0.000815)[0m   [0mSELECT * FROM `roles` INNER JOIN `roles_users` ON `roles`.id = `roles_users`.role_id WHERE (`roles_users`.user_id = 1 ) [0m
+  [4;36;1mRole Columns (0.003076)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+  [4;35;1mRole Load (0.000504)[0m   [0mSELECT * FROM `roles` [0m
+Rendering template within layouts/admin
+Rendering admin/roles/index
+Rendered shared/_tinymce (0.00008)
+Completed in 0.10610 (9 reqs/sec) | Rendering: 0.00190 (1%) | DB: 0.01599 (15%) | 200 OK [http://127.0.0.1/admin/roles]
+
+
+Processing StylesheetsController#main (for 127.0.0.1 at 2008-08-15 15:34:06) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"format"=>"css", "action"=>"main", "controller"=>"stylesheets"}
+  [4;36;1mUser Columns (0.003988)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.001287)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering stylesheets/main
+Completed in 0.01164 (85 reqs/sec) | Rendering: 0.00104 (8%) | DB: 0.00899 (77%) | 200 OK [http://127.0.0.1/stylesheets/main.css]
+
+
+Processing StylesheetsController#admin (for 127.0.0.1 at 2008-08-15 15:34:06) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"format"=>"css", "action"=>"admin", "controller"=>"stylesheets"}
+  [4;36;1mUser Columns (0.004076)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.001320)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering stylesheets/admin
+Completed in 0.01115 (89 reqs/sec) | Rendering: 0.00046 (4%) | DB: 0.01208 (108%) | 200 OK [http://127.0.0.1/stylesheets/admin.css]
+
+
+Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:34:06) [GET]
+  Session ID: b5e88ad6a3c13dcd00418e71eb37c503
+  Parameters: {"format"=>"css", "action"=>"errors", "controller"=>"stylesheets"}
+  [4;36;1mUser Columns (0.004889)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.001541)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering stylesheets/errors
+Completed in 0.01249 (80 reqs/sec) | Rendering: 0.00045 (3%) | DB: 0.00896 (71%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
