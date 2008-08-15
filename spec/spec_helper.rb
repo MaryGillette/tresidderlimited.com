@@ -13,6 +13,14 @@ Spec::Runner.configure do |config|
   config.use_instantiated_fixtures  = false
   config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
 
+  def do_login
+    current_user = mock_model(User) do |cu|
+      cu.stub!(:has_role?).and_return(true)  
+      # cu.should_receive(:current_state).and_return(:working)
+    end
+    controller.stub!(:current_user).and_return(current_user)
+  end
+  
   # == Fixtures
   #
   # You can declare fixtures for each example_group like this:

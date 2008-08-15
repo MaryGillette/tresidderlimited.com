@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	<%= page_title %> 
+	<%= meta "description", meta_description %> 
+	<%= meta "keywords", meta_keywords %> 
+	<%= stylesheet_link_tag 'main', 'admin', 'errors' %>
+	<%= javascript_include_tag "application" %>
+	<%= render :partial => "shared/tinymce" %>
+</head>
+<body>
+	<div id="canvas">
+
+		<div id="masthead">
+			<h1>Admin Area - <%= RAILS_ENV %></h1>
+			<p><%= link_to "Home", root_path %></p>
+		</div> <!-- masthead -->
+		
+		
+		<div id="nav_admin">
+			<ul>
+				<li><%= link_to "Roles", admin_roles_path %></li>											
+				<li><%= link_to "Logout", logout_path %></li>
+			</ul>
+		</div><!-- nav_admin -->
+				
+		<div id="admin_content">
+			<div id="inner_content">
+				<h1><%= content_heading %></h1>
+				<%= flash_block -%>
+				<%= yield  %>
+			</div>
+		</div>
+	
+	</div>
+</body>
+</html>

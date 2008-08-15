@@ -1,0 +1,21 @@
+<% @content_heading = "Listing roles" %>
+<table>
+<thead>	
+  <tr class="<%= cycle "even", "odd" %>">
+    <th>Name</th>
+  </tr>
+</thead>
+<tbody>
+<% for role in @roles %>
+  <tr class="<%= cycle "even", "odd" %>">
+    <td><%=h role.name %></td>
+    <td><%= link_to 'Edit', edit_admin_role_path(role) %></td>
+    <td><%= link_to 'Destroy', admin_role_path(role), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= link_to 'New role', new_admin_role_path %>

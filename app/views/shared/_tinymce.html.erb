@@ -1,0 +1,23 @@
+<%= javascript_include_tag "tiny_mce/tiny_mce" %>
+<script type="text/javascript">
+	tinyMCE.init({
+		// General options
+		mode : "textareas",
+		editor_deselector : "mceNoEditor",
+		theme : "advanced",
+		plugins : "paste",
+
+		// Theme options
+		theme_advanced_buttons1 : "pastetext,pasteword,bold,italic,underline,|,link,unlink,|,justifyleft,justifycenter,justifyright,|,cleanup,removeformat,code",
+		theme_advanced_buttons2 : "",
+		theme_advanced_toolbar_location : "top",
+		theme_advanced_toolbar_align : "center",
+		theme_advanced_statusbar_location : "bottom",
+		// CSS Styles
+		content_css : "/stylesheets/main.css",
+		
+		template_replace_values : {
+		}
+	});
+</script>
+<!-- /TinyMCE -->

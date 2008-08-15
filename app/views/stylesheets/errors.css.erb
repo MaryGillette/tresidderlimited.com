@@ -1,0 +1,42 @@
+.fieldWithErrors{
+	margin:0;
+	padding:0;
+	border:0;
+	display:inline;
+}	
+	
+.fieldWithErrors input,.fieldWithErrors select {
+	border-color:<%= @dark_red %>;
+	background-color: <%= @light_red %>;
+}
+
+#errorExplanation {
+	color:<%= @dark_red %>;
+	margin-bottom: 5px;
+}
+
+#errorExplanation h2 {
+	text-align: left;
+	font-weight: bold;
+	padding:2px 5px;
+	margin:0;
+	font-size:0.9em;
+	background-color:red;
+	color: #fff;
+}
+
+#errorExplanation p {
+	color: #333;
+	margin:0 2px;
+}
+
+#errorExplanation ul{
+	margin:0;
+}
+
+
+#errorExplanation ul li {
+	list-style: square;
+	margin:0 2em;
+	color:red;
+}

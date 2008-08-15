@@ -12,6 +12,17 @@ class CreateRoles < ActiveRecord::Migration
     add_index "roles_users", "user_id"
   end
 
+  # superuser first user and add other roles
+  execute "INSERT into roles (name) values ('superuser');"
+  execute "INSERT into roles (name) values ('administrator');"
+  execute "INSERT into roles (name) values ('member');"
+  execute "INSERT into roles (name) values ('employee');"
+
+  # roles for dinshaw
+  execute "INSERT into roles_users (user_id, role_id) values ('1','1');"
+  execute "INSERT into roles_users (user_id, role_id) values ('1','2');"
+  execute "INSERT into roles_users (user_id, role_id) values ('1','3');"
+
   def self.down
     drop_table "roles"
     drop_table "roles_users"
