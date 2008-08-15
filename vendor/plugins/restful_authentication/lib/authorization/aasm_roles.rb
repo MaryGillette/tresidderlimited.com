@@ -13,7 +13,7 @@ module Authorization
         aasm_initial_state :initial => :pending
         aasm_state :passive
         aasm_state :pending, :enter => :make_activation_code
-        aasm_state :active,  :enter => :do_activate
+        aasm_state :activated,  :enter => :do_activate
         aasm_state :suspended
         aasm_state :deleted, :enter => :do_delete
 
@@ -22,19 +22,19 @@ module Authorization
         end
         
         aasm_event :activate do
-          transitions :from => :pending, :to => :active 
+          transitions :from => :pending, :to => :activated 
         end
         
         aasm_event :suspend do
-          transitions :from => [:passive, :pending, :active], :to => :suspended
+          transitions :from => [:passive, :pending, :activated], :to => :suspended
         end
         
         aasm_event :delete do
-          transitions :from => [:passive, :pending, :active, :suspended], :to => :deleted
+          transitions :from => [:passive, :pending, :activated, :suspended], :to => :deleted
         end
 
         aasm_event :unsuspend do
-          transitions :from => :suspended, :to => :active,  :guard => Proc.new {|u| !u.activated_at.blank? }
+          transitions :from => :suspended, :to => :activated,  :guard => Proc.new {|u| !u.activated_at.blank? }
           transitions :from => :suspended, :to => :pending, :guard => Proc.new {|u| !u.activation_code.blank? }
           transitions :from => :suspended, :to => :passive
         end

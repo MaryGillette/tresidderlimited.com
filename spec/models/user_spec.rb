@@ -263,9 +263,9 @@ describe User do
       @user.suspend!
     end
 
-    it 'reverts to active state' do
+    it 'reverts to activated state' do
       @user.unsuspend!
-      @user.should be_active
+      @user.should be_activated
     end
 
     it 'reverts to passive state if activation_code and activated_at are nil' do

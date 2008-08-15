@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     logout_keeping_session!
     user = User.find_by_activation_code(params[:activation_code]) unless params[:activation_code].blank?
     case
-    when (!params[:activation_code].blank?) && user && !user.active?
+    when (!params[:activation_code].blank?) && user && !user.activated?
       user.activate!
       flash[:notice] = "Signup complete! Please sign in to continue."
       redirect_to '/login'
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
     if request.post?
       user = User.find_by_email(params[:user][:email]) unless params[:user][:email].blank?
       case
-      when (!params[:user][:email].blank?) && user && user.active?
+      when (!params[:user][:email].blank?) && user && user.activated?
         user.make_reset_code!
         flash[:notice] = "A password reset link was sent to #{user.email}"
         redirect_back_or_default('/')

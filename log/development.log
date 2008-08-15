@@ -13144,3 +13144,258 @@ Processing StylesheetsController#errors (for 127.0.0.1 at 2008-08-15 15:34:06) [
   [4;35;1mUser Load (0.001541)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
 Rendering stylesheets/errors
 Completed in 0.01249 (80 reqs/sec) | Rendering: 0.00045 (3%) | DB: 0.00896 (71%) | 200 OK [http://127.0.0.1/stylesheets/errors.css]
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000117)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000550)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.000322)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.000516)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000505)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.011451)[0m   [0mSHOW FIELDS FROM `roles`[0m
+  [4;36;1mSQL (0.003285)[0m   [0;1mdescribe `roles`[0m
+  [4;35;1mSQL (0.001450)[0m   [0mSHOW KEYS FROM `roles`[0m
+  [4;36;1mSQL (0.002418)[0m   [0;1mSHOW FIELDS FROM `roles_users`[0m
+  [4;35;1mSQL (0.002954)[0m   [0mdescribe `roles_users`[0m
+  [4;36;1mSQL (0.001450)[0m   [0;1mSHOW KEYS FROM `roles_users`[0m
+  [4;35;1mSQL (0.002455)[0m   [0mSHOW FIELDS FROM `sessions`[0m
+  [4;36;1mSQL (0.002658)[0m   [0;1mdescribe `sessions`[0m
+  [4;35;1mSQL (0.001545)[0m   [0mSHOW KEYS FROM `sessions`[0m
+  [4;36;1mSQL (0.002916)[0m   [0;1mSHOW FIELDS FROM `slugs`[0m
+  [4;35;1mSQL (0.002880)[0m   [0mdescribe `slugs`[0m
+  [4;36;1mSQL (0.004896)[0m   [0;1mSHOW KEYS FROM `slugs`[0m
+  [4;35;1mSQL (0.004131)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mSQL (0.004089)[0m   [0;1mdescribe `users`[0m
+  [4;35;1mSQL (0.001223)[0m   [0mSHOW KEYS FROM `users`[0m
+  [4;36;1mSQL (0.000120)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000747)[0m   [0mDROP DATABASE IF EXISTS `rails_test`[0m
+  [4;36;1mSQL (0.059642)[0m   [0;1mCREATE DATABASE `rails_test` DEFAULT CHARACTER SET `utf8`[0m
+  [4;35;1mSQL (0.000156)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mSQL (0.000477)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.002397)[0m   [0mCREATE TABLE `roles` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.000750)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.178534)[0m   [0mCREATE TABLE `roles_users` (`role_id` bigint(11) DEFAULT NULL NULL, `user_id` bigint(11) DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.008654)[0m   [0;1mCREATE INDEX `index_roles_users_on_role_id` ON `roles_users` (`role_id`)[0m
+  [4;35;1mSQL (0.009825)[0m   [0mCREATE INDEX `index_roles_users_on_user_id` ON `roles_users` (`user_id`)[0m
+  [4;36;1mSQL (0.000812)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.003225)[0m   [0mCREATE TABLE `sessions` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `session_id` varchar(255) DEFAULT '' NOT NULL, `data` text DEFAULT NULL NULL, `created_at` datetime DEFAULT NULL NULL, `updated_at` datetime DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.012700)[0m   [0;1mCREATE INDEX `index_sessions_on_session_id` ON `sessions` (`session_id`)[0m
+  [4;35;1mSQL (0.009855)[0m   [0mCREATE INDEX `index_sessions_on_updated_at` ON `sessions` (`updated_at`)[0m
+  [4;36;1mSQL (0.000757)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.003037)[0m   [0mCREATE TABLE `slugs` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) DEFAULT NULL NULL, `sluggable_type` varchar(255) DEFAULT NULL NULL, `sluggable_id` bigint(11) DEFAULT NULL NULL, `created_at` datetime DEFAULT NULL NULL, `updated_at` datetime DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.008918)[0m   [0;1mCREATE UNIQUE INDEX `index_slugs_on_name_and_sluggable_type` ON `slugs` (`name`, `sluggable_type`)[0m
+  [4;35;1mSQL (0.009979)[0m   [0mCREATE INDEX `index_slugs_on_sluggable_id` ON `slugs` (`sluggable_id`)[0m
+  [4;36;1mSQL (0.000715)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.003385)[0m   [0mCREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `login` varchar(40) DEFAULT NULL NULL, `name` varchar(100) DEFAULT '' NULL, `email` varchar(100) DEFAULT NULL NULL, `crypted_password` varchar(40) DEFAULT NULL NULL, `salt` varchar(40) DEFAULT NULL NULL, `remember_token` varchar(40) DEFAULT NULL NULL, `remember_token_expires_at` datetime DEFAULT NULL NULL, `activation_code` varchar(40) DEFAULT NULL NULL, `reset_code` varchar(40) DEFAULT NULL NULL, `activated_at` datetime DEFAULT NULL NULL, `state` varchar(255) DEFAULT 'passive' NULL, `deleted_at` datetime DEFAULT NULL NULL, `created_at` datetime DEFAULT NULL NULL, `updated_at` datetime DEFAULT NULL NULL, `creator_id` bigint(11) DEFAULT NULL NULL, `updater_id` bigint(11) DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.010661)[0m   [0;1mCREATE UNIQUE INDEX `index_users_on_login` ON `users` (`login`)[0m
+  [4;35;1mSQL (0.000823)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.003196)[0m   [0;1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.008799)[0m   [0mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [4;36;1mSQL (0.000846)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.000573)[0m   [0mSELECT version FROM `schema_migrations`[0m
+  [4;36;1mSQL (0.000978)[0m   [0;1mINSERT INTO `schema_migrations` (version) VALUES ('20080815004538')[0m
+  [4;35;1mSQL (0.000897)[0m   [0mINSERT INTO `schema_migrations` (version) VALUES ('20080812041618')[0m
+  [4;36;1mSQL (0.000993)[0m   [0;1mINSERT INTO `schema_migrations` (version) VALUES ('20080814231419')[0m
+  [4;35;1mSQL (0.001240)[0m   [0mINSERT INTO `schema_migrations` (version) VALUES ('20080814233350')[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000154)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000549)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.000319)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.000412)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000491)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.011375)[0m   [0mSHOW FIELDS FROM `roles`[0m
+  [4;36;1mSQL (0.072303)[0m   [0;1mdescribe `roles`[0m
+  [4;35;1mSQL (0.001574)[0m   [0mSHOW KEYS FROM `roles`[0m
+  [4;36;1mSQL (0.002501)[0m   [0;1mSHOW FIELDS FROM `roles_users`[0m
+  [4;35;1mSQL (0.002422)[0m   [0mdescribe `roles_users`[0m
+  [4;36;1mSQL (0.001569)[0m   [0;1mSHOW KEYS FROM `roles_users`[0m
+  [4;35;1mSQL (0.003083)[0m   [0mSHOW FIELDS FROM `sessions`[0m
+  [4;36;1mSQL (0.002766)[0m   [0;1mdescribe `sessions`[0m
+  [4;35;1mSQL (0.001481)[0m   [0mSHOW KEYS FROM `sessions`[0m
+  [4;36;1mSQL (0.002732)[0m   [0;1mSHOW FIELDS FROM `slugs`[0m
+  [4;35;1mSQL (0.003239)[0m   [0mdescribe `slugs`[0m
+  [4;36;1mSQL (0.001702)[0m   [0;1mSHOW KEYS FROM `slugs`[0m
+  [4;35;1mSQL (0.003987)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mSQL (0.004904)[0m   [0;1mdescribe `users`[0m
+  [4;35;1mSQL (0.001180)[0m   [0mSHOW KEYS FROM `users`[0m
+  [4;36;1mSQL (0.000166)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.118701)[0m   [0mDROP DATABASE IF EXISTS `rails_test`[0m
+  [4;36;1mSQL (0.000552)[0m   [0;1mCREATE DATABASE `rails_test` DEFAULT CHARACTER SET `utf8`[0m
+  [4;35;1mSQL (0.000160)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mSQL (0.000417)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.003100)[0m   [0mCREATE TABLE `roles` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.000629)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.002762)[0m   [0mCREATE TABLE `roles_users` (`role_id` bigint(11) DEFAULT NULL NULL, `user_id` bigint(11) DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.008281)[0m   [0;1mCREATE INDEX `index_roles_users_on_role_id` ON `roles_users` (`role_id`)[0m
+  [4;35;1mSQL (0.009883)[0m   [0mCREATE INDEX `index_roles_users_on_user_id` ON `roles_users` (`user_id`)[0m
+  [4;36;1mSQL (0.000732)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.003510)[0m   [0mCREATE TABLE `sessions` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `session_id` varchar(255) DEFAULT '' NOT NULL, `data` text DEFAULT NULL NULL, `created_at` datetime DEFAULT NULL NULL, `updated_at` datetime DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.008325)[0m   [0;1mCREATE INDEX `index_sessions_on_session_id` ON `sessions` (`session_id`)[0m
+  [4;35;1mSQL (0.009255)[0m   [0mCREATE INDEX `index_sessions_on_updated_at` ON `sessions` (`updated_at`)[0m
+  [4;36;1mSQL (0.000740)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.003298)[0m   [0mCREATE TABLE `slugs` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) DEFAULT NULL NULL, `sluggable_type` varchar(255) DEFAULT NULL NULL, `sluggable_id` bigint(11) DEFAULT NULL NULL, `created_at` datetime DEFAULT NULL NULL, `updated_at` datetime DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.008532)[0m   [0;1mCREATE UNIQUE INDEX `index_slugs_on_name_and_sluggable_type` ON `slugs` (`name`, `sluggable_type`)[0m
+  [4;35;1mSQL (0.009607)[0m   [0mCREATE INDEX `index_slugs_on_sluggable_id` ON `slugs` (`sluggable_id`)[0m
+  [4;36;1mSQL (0.000720)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.003939)[0m   [0mCREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `login` varchar(40) DEFAULT NULL NULL, `name` varchar(100) DEFAULT '' NULL, `email` varchar(100) DEFAULT NULL NULL, `crypted_password` varchar(40) DEFAULT NULL NULL, `salt` varchar(40) DEFAULT NULL NULL, `remember_token` varchar(40) DEFAULT NULL NULL, `remember_token_expires_at` datetime DEFAULT NULL NULL, `activation_code` varchar(40) DEFAULT NULL NULL, `reset_code` varchar(40) DEFAULT NULL NULL, `activated_at` datetime DEFAULT NULL NULL, `state` varchar(255) DEFAULT 'passive' NULL, `deleted_at` datetime DEFAULT NULL NULL, `created_at` datetime DEFAULT NULL NULL, `updated_at` datetime DEFAULT NULL NULL, `creator_id` bigint(11) DEFAULT NULL NULL, `updater_id` bigint(11) DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.010939)[0m   [0;1mCREATE UNIQUE INDEX `index_users_on_login` ON `users` (`login`)[0m
+  [4;35;1mSQL (0.000785)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.002694)[0m   [0;1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.008330)[0m   [0mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [4;36;1mSQL (0.000823)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.000563)[0m   [0mSELECT version FROM `schema_migrations`[0m
+  [4;36;1mSQL (0.000829)[0m   [0;1mINSERT INTO `schema_migrations` (version) VALUES ('20080815004538')[0m
+  [4;35;1mSQL (0.000878)[0m   [0mINSERT INTO `schema_migrations` (version) VALUES ('20080812041618')[0m
+  [4;36;1mSQL (0.000928)[0m   [0;1mINSERT INTO `schema_migrations` (version) VALUES ('20080814231419')[0m
+  [4;35;1mSQL (0.000937)[0m   [0mINSERT INTO `schema_migrations` (version) VALUES ('20080814233350')[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000143)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000548)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.000320)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.000421)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000491)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.011362)[0m   [0mSHOW FIELDS FROM `roles`[0m
+  [4;36;1mSQL (0.064213)[0m   [0;1mdescribe `roles`[0m
+  [4;35;1mSQL (0.001557)[0m   [0mSHOW KEYS FROM `roles`[0m
+  [4;36;1mSQL (0.002565)[0m   [0;1mSHOW FIELDS FROM `roles_users`[0m
+  [4;35;1mSQL (0.003984)[0m   [0mdescribe `roles_users`[0m
+  [4;36;1mSQL (0.001859)[0m   [0;1mSHOW KEYS FROM `roles_users`[0m
+  [4;35;1mSQL (0.002218)[0m   [0mSHOW FIELDS FROM `sessions`[0m
+  [4;36;1mSQL (0.003040)[0m   [0;1mdescribe `sessions`[0m
+  [4;35;1mSQL (0.001644)[0m   [0mSHOW KEYS FROM `sessions`[0m
+  [4;36;1mSQL (0.002572)[0m   [0;1mSHOW FIELDS FROM `slugs`[0m
+  [4;35;1mSQL (0.003083)[0m   [0mdescribe `slugs`[0m
+  [4;36;1mSQL (0.001562)[0m   [0;1mSHOW KEYS FROM `slugs`[0m
+  [4;35;1mSQL (0.003831)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mSQL (0.003827)[0m   [0;1mdescribe `users`[0m
+  [4;35;1mSQL (0.001127)[0m   [0mSHOW KEYS FROM `users`[0m
+  [4;36;1mSQL (0.000154)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.041948)[0m   [0mDROP DATABASE IF EXISTS `rails_test`[0m
+  [4;36;1mSQL (0.000552)[0m   [0;1mCREATE DATABASE `rails_test` DEFAULT CHARACTER SET `utf8`[0m
+  [4;35;1mSQL (0.000153)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mSQL (0.000475)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.003584)[0m   [0mCREATE TABLE `roles` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.000649)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.002761)[0m   [0mCREATE TABLE `roles_users` (`role_id` bigint(11) DEFAULT NULL NULL, `user_id` bigint(11) DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.008399)[0m   [0;1mCREATE INDEX `index_roles_users_on_role_id` ON `roles_users` (`role_id`)[0m
+  [4;35;1mSQL (0.008896)[0m   [0mCREATE INDEX `index_roles_users_on_user_id` ON `roles_users` (`user_id`)[0m
+  [4;36;1mSQL (0.000728)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.003527)[0m   [0mCREATE TABLE `sessions` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `session_id` varchar(255) DEFAULT '' NOT NULL, `data` text DEFAULT NULL NULL, `created_at` datetime DEFAULT NULL NULL, `updated_at` datetime DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.008808)[0m   [0;1mCREATE INDEX `index_sessions_on_session_id` ON `sessions` (`session_id`)[0m
+  [4;35;1mSQL (0.009378)[0m   [0mCREATE INDEX `index_sessions_on_updated_at` ON `sessions` (`updated_at`)[0m
+  [4;36;1mSQL (0.000733)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.003704)[0m   [0mCREATE TABLE `slugs` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) DEFAULT NULL NULL, `sluggable_type` varchar(255) DEFAULT NULL NULL, `sluggable_id` bigint(11) DEFAULT NULL NULL, `created_at` datetime DEFAULT NULL NULL, `updated_at` datetime DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.008982)[0m   [0;1mCREATE UNIQUE INDEX `index_slugs_on_name_and_sluggable_type` ON `slugs` (`name`, `sluggable_type`)[0m
+  [4;35;1mSQL (0.009398)[0m   [0mCREATE INDEX `index_slugs_on_sluggable_id` ON `slugs` (`sluggable_id`)[0m
+  [4;36;1mSQL (0.000735)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.004121)[0m   [0mCREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `login` varchar(40) DEFAULT NULL NULL, `name` varchar(100) DEFAULT '' NULL, `email` varchar(100) DEFAULT NULL NULL, `crypted_password` varchar(40) DEFAULT NULL NULL, `salt` varchar(40) DEFAULT NULL NULL, `remember_token` varchar(40) DEFAULT NULL NULL, `remember_token_expires_at` datetime DEFAULT NULL NULL, `activation_code` varchar(40) DEFAULT NULL NULL, `reset_code` varchar(40) DEFAULT NULL NULL, `activated_at` datetime DEFAULT NULL NULL, `state` varchar(255) DEFAULT 'passive' NULL, `deleted_at` datetime DEFAULT NULL NULL, `created_at` datetime DEFAULT NULL NULL, `updated_at` datetime DEFAULT NULL NULL, `creator_id` bigint(11) DEFAULT NULL NULL, `updater_id` bigint(11) DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.009872)[0m   [0;1mCREATE UNIQUE INDEX `index_users_on_login` ON `users` (`login`)[0m
+  [4;35;1mSQL (0.000815)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.002593)[0m   [0;1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.008634)[0m   [0mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [4;36;1mSQL (0.000821)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.000562)[0m   [0mSELECT version FROM `schema_migrations`[0m
+  [4;36;1mSQL (0.000953)[0m   [0;1mINSERT INTO `schema_migrations` (version) VALUES ('20080815004538')[0m
+  [4;35;1mSQL (0.001716)[0m   [0mINSERT INTO `schema_migrations` (version) VALUES ('20080812041618')[0m
+  [4;36;1mSQL (0.001035)[0m   [0;1mINSERT INTO `schema_migrations` (version) VALUES ('20080814231419')[0m
+  [4;35;1mSQL (0.000889)[0m   [0mINSERT INTO `schema_migrations` (version) VALUES ('20080814233350')[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000144)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000551)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.000316)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.000417)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000493)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.011478)[0m   [0mSHOW FIELDS FROM `roles`[0m
+  [4;36;1mSQL (0.079142)[0m   [0;1mdescribe `roles`[0m
+  [4;35;1mSQL (0.001429)[0m   [0mSHOW KEYS FROM `roles`[0m
+  [4;36;1mSQL (0.002581)[0m   [0;1mSHOW FIELDS FROM `roles_users`[0m
+  [4;35;1mSQL (0.003234)[0m   [0mdescribe `roles_users`[0m
+  [4;36;1mSQL (0.001700)[0m   [0;1mSHOW KEYS FROM `roles_users`[0m
+  [4;35;1mSQL (0.002686)[0m   [0mSHOW FIELDS FROM `sessions`[0m
+  [4;36;1mSQL (0.002581)[0m   [0;1mdescribe `sessions`[0m
+  [4;35;1mSQL (0.001593)[0m   [0mSHOW KEYS FROM `sessions`[0m
+  [4;36;1mSQL (0.002840)[0m   [0;1mSHOW FIELDS FROM `slugs`[0m
+  [4;35;1mSQL (0.003008)[0m   [0mdescribe `slugs`[0m
+  [4;36;1mSQL (0.001664)[0m   [0;1mSHOW KEYS FROM `slugs`[0m
+  [4;35;1mSQL (0.003222)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mSQL (0.003928)[0m   [0;1mdescribe `users`[0m
+  [4;35;1mSQL (0.001155)[0m   [0mSHOW KEYS FROM `users`[0m
+  [4;36;1mSQL (0.000179)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.080458)[0m   [0mDROP DATABASE IF EXISTS `rails_test`[0m
+  [4;36;1mSQL (0.000758)[0m   [0;1mCREATE DATABASE `rails_test` DEFAULT CHARACTER SET `utf8`[0m
+  [4;35;1mSQL (0.000159)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mSQL (0.000420)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.002630)[0m   [0mCREATE TABLE `roles` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.001071)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.004041)[0m   [0mCREATE TABLE `roles_users` (`role_id` bigint(11) DEFAULT NULL NULL, `user_id` bigint(11) DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.008961)[0m   [0;1mCREATE INDEX `index_roles_users_on_role_id` ON `roles_users` (`role_id`)[0m
+  [4;35;1mSQL (0.009037)[0m   [0mCREATE INDEX `index_roles_users_on_user_id` ON `roles_users` (`user_id`)[0m
+  [4;36;1mSQL (0.000722)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.002837)[0m   [0mCREATE TABLE `sessions` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `session_id` varchar(255) DEFAULT '' NOT NULL, `data` text DEFAULT NULL NULL, `created_at` datetime DEFAULT NULL NULL, `updated_at` datetime DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.008999)[0m   [0;1mCREATE INDEX `index_sessions_on_session_id` ON `sessions` (`session_id`)[0m
+  [4;35;1mSQL (0.009713)[0m   [0mCREATE INDEX `index_sessions_on_updated_at` ON `sessions` (`updated_at`)[0m
+  [4;36;1mSQL (0.000750)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.003101)[0m   [0mCREATE TABLE `slugs` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) DEFAULT NULL NULL, `sluggable_type` varchar(255) DEFAULT NULL NULL, `sluggable_id` bigint(11) DEFAULT NULL NULL, `created_at` datetime DEFAULT NULL NULL, `updated_at` datetime DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.010769)[0m   [0;1mCREATE UNIQUE INDEX `index_slugs_on_name_and_sluggable_type` ON `slugs` (`name`, `sluggable_type`)[0m
+  [4;35;1mSQL (0.010075)[0m   [0mCREATE INDEX `index_slugs_on_sluggable_id` ON `slugs` (`sluggable_id`)[0m
+  [4;36;1mSQL (0.000691)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.004173)[0m   [0mCREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `login` varchar(40) DEFAULT NULL NULL, `name` varchar(100) DEFAULT '' NULL, `email` varchar(100) DEFAULT NULL NULL, `crypted_password` varchar(40) DEFAULT NULL NULL, `salt` varchar(40) DEFAULT NULL NULL, `remember_token` varchar(40) DEFAULT NULL NULL, `remember_token_expires_at` datetime DEFAULT NULL NULL, `activation_code` varchar(40) DEFAULT NULL NULL, `reset_code` varchar(40) DEFAULT NULL NULL, `activated_at` datetime DEFAULT NULL NULL, `state` varchar(255) DEFAULT 'passive' NULL, `deleted_at` datetime DEFAULT NULL NULL, `created_at` datetime DEFAULT NULL NULL, `updated_at` datetime DEFAULT NULL NULL, `creator_id` bigint(11) DEFAULT NULL NULL, `updater_id` bigint(11) DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.010161)[0m   [0;1mCREATE UNIQUE INDEX `index_users_on_login` ON `users` (`login`)[0m
+  [4;35;1mSQL (0.000785)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.003423)[0m   [0;1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.008512)[0m   [0mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [4;36;1mSQL (0.000823)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.000572)[0m   [0mSELECT version FROM `schema_migrations`[0m
+  [4;36;1mSQL (0.000895)[0m   [0;1mINSERT INTO `schema_migrations` (version) VALUES ('20080815004538')[0m
+  [4;35;1mSQL (0.000988)[0m   [0mINSERT INTO `schema_migrations` (version) VALUES ('20080812041618')[0m
+  [4;36;1mSQL (0.000960)[0m   [0;1mINSERT INTO `schema_migrations` (version) VALUES ('20080814231419')[0m
+  [4;35;1mSQL (0.000961)[0m   [0mINSERT INTO `schema_migrations` (version) VALUES ('20080814233350')[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.000128)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.000551)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.000318)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.000444)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000497)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.011307)[0m   [0mSHOW FIELDS FROM `roles`[0m
+  [4;36;1mSQL (0.097045)[0m   [0;1mdescribe `roles`[0m
+  [4;35;1mSQL (0.001492)[0m   [0mSHOW KEYS FROM `roles`[0m
+  [4;36;1mSQL (0.002432)[0m   [0;1mSHOW FIELDS FROM `roles_users`[0m
+  [4;35;1mSQL (0.002793)[0m   [0mdescribe `roles_users`[0m
+  [4;36;1mSQL (0.002235)[0m   [0;1mSHOW KEYS FROM `roles_users`[0m
+  [4;35;1mSQL (0.002657)[0m   [0mSHOW FIELDS FROM `sessions`[0m
+  [4;36;1mSQL (0.002941)[0m   [0;1mdescribe `sessions`[0m
+  [4;35;1mSQL (0.001644)[0m   [0mSHOW KEYS FROM `sessions`[0m
+  [4;36;1mSQL (0.002814)[0m   [0;1mSHOW FIELDS FROM `slugs`[0m
+  [4;35;1mSQL (0.002977)[0m   [0mdescribe `slugs`[0m
+  [4;36;1mSQL (0.001904)[0m   [0;1mSHOW KEYS FROM `slugs`[0m
+  [4;35;1mSQL (0.003852)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mSQL (0.003978)[0m   [0;1mdescribe `users`[0m
+  [4;35;1mSQL (0.001325)[0m   [0mSHOW KEYS FROM `users`[0m
+  [4;36;1mSQL (0.000152)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.121722)[0m   [0mDROP DATABASE IF EXISTS `rails_test`[0m
+  [4;36;1mSQL (0.000548)[0m   [0;1mCREATE DATABASE `rails_test` DEFAULT CHARACTER SET `utf8`[0m
+  [4;35;1mSQL (0.000159)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mSQL (0.000420)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.003292)[0m   [0mCREATE TABLE `roles` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.000652)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.002822)[0m   [0mCREATE TABLE `roles_users` (`role_id` bigint(11) DEFAULT NULL NULL, `user_id` bigint(11) DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.008537)[0m   [0;1mCREATE INDEX `index_roles_users_on_role_id` ON `roles_users` (`role_id`)[0m
+  [4;35;1mSQL (0.009237)[0m   [0mCREATE INDEX `index_roles_users_on_user_id` ON `roles_users` (`user_id`)[0m
+  [4;36;1mSQL (0.000714)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.003202)[0m   [0mCREATE TABLE `sessions` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `session_id` varchar(255) DEFAULT '' NOT NULL, `data` text DEFAULT NULL NULL, `created_at` datetime DEFAULT NULL NULL, `updated_at` datetime DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.008470)[0m   [0;1mCREATE INDEX `index_sessions_on_session_id` ON `sessions` (`session_id`)[0m
+  [4;35;1mSQL (0.009464)[0m   [0mCREATE INDEX `index_sessions_on_updated_at` ON `sessions` (`updated_at`)[0m
+  [4;36;1mSQL (0.000734)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.003376)[0m   [0mCREATE TABLE `slugs` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255) DEFAULT NULL NULL, `sluggable_type` varchar(255) DEFAULT NULL NULL, `sluggable_id` bigint(11) DEFAULT NULL NULL, `created_at` datetime DEFAULT NULL NULL, `updated_at` datetime DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.009167)[0m   [0;1mCREATE UNIQUE INDEX `index_slugs_on_name_and_sluggable_type` ON `slugs` (`name`, `sluggable_type`)[0m
+  [4;35;1mSQL (0.009223)[0m   [0mCREATE INDEX `index_slugs_on_sluggable_id` ON `slugs` (`sluggable_id`)[0m
+  [4;36;1mSQL (0.000723)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.004022)[0m   [0mCREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `login` varchar(40) DEFAULT NULL NULL, `name` varchar(100) DEFAULT '' NULL, `email` varchar(100) DEFAULT NULL NULL, `crypted_password` varchar(40) DEFAULT NULL NULL, `salt` varchar(40) DEFAULT NULL NULL, `remember_token` varchar(40) DEFAULT NULL NULL, `remember_token_expires_at` datetime DEFAULT NULL NULL, `activation_code` varchar(40) DEFAULT NULL NULL, `reset_code` varchar(40) DEFAULT NULL NULL, `activated_at` datetime DEFAULT NULL NULL, `state` varchar(255) DEFAULT 'passive' NULL, `deleted_at` datetime DEFAULT NULL NULL, `created_at` datetime DEFAULT NULL NULL, `updated_at` datetime DEFAULT NULL NULL, `creator_id` bigint(11) DEFAULT NULL NULL, `updater_id` bigint(11) DEFAULT NULL NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.010028)[0m   [0;1mCREATE UNIQUE INDEX `index_users_on_login` ON `users` (`login`)[0m
+  [4;35;1mSQL (0.000793)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.002584)[0m   [0;1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.024805)[0m   [0mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [4;36;1mSQL (0.000655)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.000399)[0m   [0mSELECT version FROM `schema_migrations`[0m
+  [4;36;1mSQL (0.001155)[0m   [0;1mINSERT INTO `schema_migrations` (version) VALUES ('20080815004538')[0m
+  [4;35;1mSQL (0.001030)[0m   [0mINSERT INTO `schema_migrations` (version) VALUES ('20080812041618')[0m
+  [4;36;1mSQL (0.000934)[0m   [0;1mINSERT INTO `schema_migrations` (version) VALUES ('20080814231419')[0m
+  [4;35;1mSQL (0.000869)[0m   [0mINSERT INTO `schema_migrations` (version) VALUES ('20080814233350')[0m
