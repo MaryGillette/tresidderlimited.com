@@ -31,6 +31,18 @@ class StylesheetsController < ApplicationController
     end
   end
   
+  def reset
+    do_respond_to
+  end
+  
+  def diagnostic
+    do_respond_to
+  end
+  
+  def diagnostic_ie7
+    do_respond_to
+  end
+  
   def main
     do_respond_to
   end

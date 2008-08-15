@@ -5,13 +5,28 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 	<title>main.html</title>
+	<%= page_title %> 
+	<%= meta "description", meta_description %> 
+	<%= meta "keywords", meta_keywords %>
 	
+	<%= javascript_include_tag 'application' %>
+	<%= stylesheet_link_tag 'reset', 'layout', 'main', 'nav', 'errors' %>
+	<%= render :partial => "shared/tinymce" %>
 </head>
 
 <body>
+	<div id="container">
 
-<%= render :partial => 'users/user_bar' %>
-<%= yield %>
+		<div id="content">
+
+		<%= render :partial => 'users/user_bar' %>
+		<%= yield %>
+	</div>
+	<div id="footer">
+			<h1>Footer</h1>
+
+		</div>
+</div>
 
 </body>
 </html>
