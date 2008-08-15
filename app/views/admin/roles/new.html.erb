@@ -1,7 +1,7 @@
 <% @content_heading = "New role" %>
 <%= error_messages_for :role %>
 
-<% form_for(@role) do |f| %>
+<% form_for([:admin,@role]) do |f| %>
   <p>
     <b>Name</b><br />
     <%= f.text_field :name %>
