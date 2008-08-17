@@ -1,0 +1,25 @@
+div:empty, span:empty,
+li:empty, p:empty,
+td:empty, th:empty {padding: 0.5em; background: yellow;}
+
+*[style], img, a[href],
+  font, center {border: 5px solid red;}
+*[class=""], *[id=""] {border: 5px dotted red;}
+table, th {border: 5px solid red;}
+
+img {border: 5px solid red;}
+img[alt][title] {border-width: 0;}
+img[alt] {border-color: fuchsia;}
+img[alt], img[title] {border-style: double;}
+img[alt=""][title],
+img[alt][title=""] {border-width: 3px;}
+img[alt=""][title=""] {border-style: dotted;}
+
+table[summary],
+  th[scope="col"],
+  th[scope="row"] {border: 1px solid #AAA;}
+
+a[title] {border-width: 0;}
+a[title=""] {border-width: 3px;}
+a[href="#"] {background: lime;}
+a[href=""] {background: fuchsia;}
