@@ -13399,3 +13399,6 @@ WARNING: You're using the Ruby-based MySQL library that ships with Rails. This l
   [4;35;1mSQL (0.001030)[0m   [0mINSERT INTO `schema_migrations` (version) VALUES ('20080812041618')[0m
   [4;36;1mSQL (0.000934)[0m   [0;1mINSERT INTO `schema_migrations` (version) VALUES ('20080814231419')[0m
   [4;35;1mSQL (0.000869)[0m   [0mINSERT INTO `schema_migrations` (version) VALUES ('20080814233350')[0m
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+  [4;36;1mSQL (0.051000)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.059627)[0m   [0mSELECT version FROM schema_migrations[0m
