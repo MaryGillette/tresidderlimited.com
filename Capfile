@@ -66,7 +66,7 @@ task :create_shared_config do
   # Copy database.yml if it doesn't exist.
   result = run_and_return "ls #{shared_path}/config"
   unless result.match(/database\.yml/)
-    contents = render_erb_template(File.dirname(__FILE__) + "/templates/database.yml")
+    contents = render_erb_template(File.dirname(__FILE__) + "/config/database.yml.example")
     put contents, "#{shared_path}/config/database.yml"
     inform "Please edit database.yml in the shared directory."
   end
