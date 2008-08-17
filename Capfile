@@ -45,19 +45,19 @@ task :copy_config_files do
 end
 after "deploy:update_code", "copy_config_files"
 
-desc "Generate spin script from variables"
-task :generate_spin_script, :roles => :app do
-  result = render_erb_template(File.dirname(__FILE__) + "/config/spin.erb")
-  put result, "#{release_path}/script/spin", :mode => 0755
-end
-after "deploy:update_code", "generate_spin_script"
+# desc "Generate spin script from variables"
+# task :generate_spin_script, :roles => :app do
+#   result = render_erb_template(File.dirname(__FILE__) + "/config/spin.erb")
+#   put result, "#{release_path}/script/spin", :mode => 0755
+# end
+# after "deploy:update_code", "generate_spin_script"
 
-desc "Fix the permissions on script spin"
-task :fix_script_perms do
-  run "chmod 755 #{latest_release}/script/spin"
-end
-after "deploy:update_code", 'fix_script_perms'
-
+# desc "Fix the permissions on script spin"
+# task :fix_script_perms do
+#   run "chmod 755 #{latest_release}/script/spin"
+# end
+# after "deploy:update_code", 'fix_script_perms'
+# 
 desc "Create shared directories and default database.yml."
 task :create_shared_config do
   run "mkdir -p #{shared_path}/config"
