@@ -89,7 +89,7 @@ end
 namespace :deploy do
 
   task :start, :roles => :app do
-    run "rm -rf /home/#{user}/public_html;ln -s #{current_path}/public /home/#{user}/public_html"
+    run "rm -rf /home/#{user}/public_html;ln -s #{current_path}/public/www.tresidderlimited.com /home/#{user}/public_html"
   end
 
   task :restart, :roles => :app do
