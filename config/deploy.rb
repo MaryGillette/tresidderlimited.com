@@ -10,8 +10,8 @@ set :branch, "master"
 
 set :use_sudo, false                	# HostingRails users don't have sudo access
 set :deploy_to, "/home/#{user}/#{application}"          # Where on the server your app will be deployed
-
 set :deploy_via, :checkout                # For this tutorial, svn checkout will be the deployment method
+set :rails_env, :production
 
 set :chmod755, "app config db lib public vendor script script/* public/disp*"  	# Some files that will need proper permissions
 # set :mongrel_port, "4444"                # Mongrel port that was assigned to you

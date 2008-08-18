@@ -73,11 +73,18 @@ task :create_shared_config do
 end
 after "deploy:setup", "create_shared_config"
 
+
 desc "Make sym link for user content"
 task :make_sym_links_for_user_content do
   run "ln -s  #{shared_path}/public/attachments #{release_path}/public/attachments"  
 end
 after "deploy:update_code", "make_sym_links_for_user_content"
+
+desc "Restarting after deployment"
+task :after_deploy, :roles => [:app, :db, :web] do
+ run "sed 's/# ENV\\[/ENV\\[/g' #{deploy_to}/current/config/environment.rb > #{deploy_to}/current/config/environment.temp"
+ run "mv #{deploy_to}/current/config/environment.temp #{deploy_to}/current/config/environment.rb"
+end
 
 namespace :deploy do
 
@@ -89,10 +96,7 @@ namespace :deploy do
     run "#{current_path}/script/process/reaper --dispatcher=dispatch.fcgi"
     run "cd #{current_path} && chmod 755 #{chmod755}"
   end
-
-end
-
-namespace :deploy do
+  
   namespace :web do
     desc "Serve up a custom maintenance page."
 
@@ -109,4 +113,5 @@ namespace :deploy do
       put page, "#{shared_path}/system/maintenance.html", :mode => "0644"
     end
   end
+
 end
